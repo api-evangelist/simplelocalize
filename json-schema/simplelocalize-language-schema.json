@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api.simplelocalize.io/schemas/language",
+  "title": "SimpleLocalize Language",
+  "description": "A language configured in a SimpleLocalize translation project.",
+  "type": "object",
+  "properties": {
+    "key": {
+      "type": "string",
+      "description": "Unique language identifier within the project (e.g., en, fr-FR)",
+      "maxLength": 20
+    },
+    "name": {
+      "type": "string",
+      "description": "Human-readable display name for the language (e.g., English, French)",
+      "maxLength": 200
+    }
+  },
+  "required": ["key"]
+}

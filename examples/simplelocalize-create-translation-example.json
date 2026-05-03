@@ -1,0 +1,34 @@
+{
+  "title": "Create Translation Example",
+  "description": "Example request and response for creating or updating a translation string",
+  "request": {
+    "method": "POST",
+    "url": "https://api.simplelocalize.io/api/v1/translations",
+    "headers": {
+      "X-SimpleLocalize-Token": "your-api-key-here",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "key": "checkout.button.submit",
+      "namespace": "ecommerce",
+      "language": "fr",
+      "text": "Confirmer la commande"
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "status": 200,
+      "message": "OK",
+      "data": {
+        "key": "checkout.button.submit",
+        "namespace": "ecommerce",
+        "language": "fr",
+        "text": "Confirmer la commande",
+        "reviewStatus": "NOT_REVIEWED",
+        "customerId": null,
+        "modifiedAt": "2026-05-02T12:00:00Z"
+      }
+    }
+  }
+}

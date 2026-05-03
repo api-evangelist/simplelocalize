@@ -1,0 +1,50 @@
+{
+  "title": "SimpleLocalize Translation Structure",
+  "description": "Documentation of the translation data structure returned by the SimpleLocalize API",
+  "type": "object",
+  "fields": [
+    {
+      "name": "key",
+      "type": "string",
+      "required": true,
+      "description": "Translation key identifier. Used to reference this translation in application code (e.g., HELLO_WORLD, nav.home.title)"
+    },
+    {
+      "name": "namespace",
+      "type": "string",
+      "required": false,
+      "description": "Logical grouping namespace for organizing translation keys (e.g., common, navigation, checkout)"
+    },
+    {
+      "name": "language",
+      "type": "string",
+      "required": true,
+      "description": "IETF language tag identifying the target language (e.g., en, fr, zh-Hans)"
+    },
+    {
+      "name": "text",
+      "type": "string",
+      "required": false,
+      "description": "The actual translated text content. May be empty for untranslated strings."
+    },
+    {
+      "name": "reviewStatus",
+      "type": "enum",
+      "required": false,
+      "values": ["REVIEWED", "NOT_REVIEWED"],
+      "description": "Review workflow status indicating whether a human reviewer has approved this translation"
+    },
+    {
+      "name": "customerId",
+      "type": "string",
+      "required": false,
+      "description": "Customer segment identifier for white-label or multi-tenant translation overrides"
+    },
+    {
+      "name": "modifiedAt",
+      "type": "string (ISO 8601 datetime)",
+      "required": false,
+      "description": "Timestamp of the most recent modification to this translation"
+    }
+  ]
+}

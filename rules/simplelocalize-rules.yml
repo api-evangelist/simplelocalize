@@ -1,0 +1,83 @@
+rules:
+  simplelocalize-api-key-header:
+    description: All translation management endpoints must require the X-SimpleLocalize-Token API key header
+    message: "Translation management endpoint is missing X-SimpleLocalize-Token security requirement"
+    severity: error
+    given: "$.paths[?(!@path.match(/\\/api\\/v2\\/projects/))].*.security"
+    then:
+      function: truthy
+
+  simplelocalize-versioned-paths:
+    description: All paths must be versioned with /api/v1/ or /api/v2/ prefix
+    message: "API path '{{value}}' must be versioned with /api/v1/ or /api/v2/"
+    severity: error
+    given: "$.paths[*]~"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^/api/v[0-9]+/"
+
+  simplelocalize-response-envelope:
+    description: All success responses must use SimpleLocalize envelope with status, message, and data fields
+    message: "Response schema should include status (integer), message (string), and data fields"
+    severity: warn
+    given: "$.paths.*.*.responses.200.content.application/json.schema"
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+
+  simplelocalize-operation-ids:
+    description: All operations must have camelCase operationId values
+    message: "operationId '{{value}}' should use camelCase"
+    severity: error
+    given: "$.paths.*.*.operationId"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[a-z][a-zA-Z0-9]+$"
+
+  simplelocalize-tag-usage:
+    description: All operations must have at least one tag
+    message: "Operation is missing a tag"
+    severity: warn
+    given: "$.paths.*.*"
+    then:
+      field: tags
+      function: truthy
+
+  simplelocalize-customer-key-length:
+    description: Customer key schema must enforce max length of 40 characters
+    message: "Customer key should have maxLength of 40"
+    severity: warn
+    given: "$.components.schemas.Customer.properties.key"
+    then:
+      field: maxLength
+      function: truthy
+
+  simplelocalize-language-key-length:
+    description: Language key schema must enforce max length of 20 characters
+    message: "Language key should have maxLength of 20"
+    severity: warn
+    given: "$.components.schemas.Language.properties.key"
+    then:
+      field: maxLength
+      function: truthy
+
+  simplelocalize-security-schemes:
+    description: Security schemes must define both ApiKeyAuth and BearerAuth
+    message: "Missing required security scheme definition"
+    severity: error
+    given: "$.components.securitySchemes"
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          type: object
+          required:
+            - ApiKeyAuth
+            - BearerAuth

@@ -1,0 +1,36 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "sl": "https://simplelocalize.io/schema/",
+    "Translation": "sl:Translation",
+    "Language": "sl:Language",
+    "Project": "sl:Project",
+    "Customer": "sl:Customer",
+    "key": "sl:key",
+    "namespace": "sl:namespace",
+    "language": "sl:language",
+    "text": "sl:text",
+    "reviewStatus": "sl:reviewStatus",
+    "customerId": "sl:customerId",
+    "modifiedAt": {
+      "@id": "schema:dateModified",
+      "@type": "schema:DateTime"
+    },
+    "name": "schema:name",
+    "description": "schema:description",
+    "apiKey": "sl:apiKey",
+    "translationCount": "sl:translationCount",
+    "createdAt": {
+      "@id": "schema:dateCreated",
+      "@type": "schema:DateTime"
+    },
+    "languages": {
+      "@id": "sl:hasLanguage",
+      "@type": "@id",
+      "@container": "@set"
+    },
+    "SoftwareApplication": "schema:SoftwareApplication",
+    "WebAPI": "schema:WebAPI",
+    "Service": "schema:Service"
+  }
+}

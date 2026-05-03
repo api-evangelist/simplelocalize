@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api.simplelocalize.io/schemas/project",
+  "title": "SimpleLocalize Project",
+  "description": "A translation project in SimpleLocalize that contains languages, translation keys, and associated metadata.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique project identifier"
+    },
+    "name": {
+      "type": "string",
+      "description": "Project display name"
+    },
+    "apiKey": {
+      "type": "string",
+      "description": "Project-specific API key for authentication"
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Project creation timestamp"
+    },
+    "languages": {
+      "type": "array",
+      "description": "Languages configured in this project",
+      "items": {
+        "$ref": "https://api.simplelocalize.io/schemas/language"
+      }
+    },
+    "translationCount": {
+      "type": "integer",
+      "description": "Total number of translation strings in the project",
+      "minimum": 0
+    }
+  },
+  "required": ["id", "name"]
+}

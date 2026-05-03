@@ -1,0 +1,50 @@
+{
+  "title": "List Translations Example",
+  "description": "Example request and response for listing translations filtered by language",
+  "request": {
+    "method": "GET",
+    "url": "https://api.simplelocalize.io/api/v2/translations?language=en&namespace=common",
+    "headers": {
+      "X-SimpleLocalize-Token": "your-api-key-here"
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "status": 200,
+      "message": "OK",
+      "data": [
+        {
+          "key": "nav.home",
+          "namespace": "common",
+          "language": "en",
+          "text": "Home",
+          "reviewStatus": "REVIEWED",
+          "customerId": null,
+          "modifiedAt": "2026-04-15T10:30:00Z"
+        },
+        {
+          "key": "nav.about",
+          "namespace": "common",
+          "language": "en",
+          "text": "About Us",
+          "reviewStatus": "REVIEWED",
+          "customerId": null,
+          "modifiedAt": "2026-04-15T10:30:00Z"
+        },
+        {
+          "key": "nav.contact",
+          "namespace": "common",
+          "language": "en",
+          "text": "Contact",
+          "reviewStatus": "NOT_REVIEWED",
+          "customerId": null,
+          "modifiedAt": "2026-04-20T08:15:00Z"
+        }
+      ],
+      "page": 0,
+      "totalPages": 1,
+      "totalElements": 3
+    }
+  }
+}

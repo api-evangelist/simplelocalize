@@ -1,0 +1,749 @@
+openapi: 3.1.0
+info:
+  title: SimpleLocalize API
+  description: >-
+    The SimpleLocalize API is a REST API for managing translations, languages,
+    projects, and customers. It enables developers to create, read, update, and
+    delete translations programmatically, import and export translation files in
+    30+ formats, auto-translate using DeepL, Google Translate, or OpenAI, and
+    publish translations to CDN for use in web, mobile, and backend applications.
+  version: v2
+  contact:
+    name: SimpleLocalize Support
+    url: https://simplelocalize.io/contact/
+  termsOfService: https://simplelocalize.io/terms-of-service/
+  license:
+    name: Commercial
+    url: https://simplelocalize.io/terms-of-service/
+externalDocs:
+  description: SimpleLocalize API Documentation
+  url: https://simplelocalize.io/docs/api/get-started/
+servers:
+  - url: https://api.simplelocalize.io
+    description: SimpleLocalize Production API
+tags:
+  - name: Translations
+    description: Manage translation strings across languages and namespaces
+  - name: Languages
+    description: Manage project languages
+  - name: Projects
+    description: Manage translation projects
+  - name: Customers
+    description: Manage customer-specific translation segments
+  - name: Import
+    description: Import translation files in various formats
+  - name: Export
+    description: Export translation files in various formats
+  - name: Publication
+    description: Publish translations to CDN environments
+security:
+  - ApiKeyAuth: []
+paths:
+  /api/v2/translations:
+    get:
+      operationId: listTranslations
+      summary: List Translations
+      description: >-
+        Retrieve translations with filtering and pagination. Supports filtering
+        by key, language, namespace, text content, review status, and customer ID.
+        Returns paginated results with up to 500 items per page.
+      tags:
+        - Translations
+      parameters:
+        - name: text
+          in: query
+          description: Search translated text using case-insensitive partial matching
+          required: false
+          schema:
+            type: string
+        - name: textStatus
+          in: query
+          description: Filter by translation completeness
+          required: false
+          schema:
+            type: string
+            enum:
+              - EMPTY
+              - NOT_EMPTY
+        - name: reviewsStatus
+          in: query
+          description: Filter by review status
+          required: false
+          schema:
+            type: string
+            enum:
+              - REVIEWED
+              - NOT_REVIEWED
+        - name: key
+          in: query
+          description: Exact match filter for translation key
+          required: false
+          schema:
+            type: string
+        - name: namespace
+          in: query
+          description: Exact match filter for translation namespace
+          required: false
+          schema:
+            type: string
+        - name: language
+          in: query
+          description: Exact match filter for language identifier
+          required: false
+          schema:
+            type: string
+        - name: customerId
+          in: query
+          description: Filter for customer-specific translations
+          required: false
+          schema:
+            type: string
+        - name: page
+          in: query
+          description: Pagination page number
+          required: false
+          schema:
+            type: integer
+            default: 0
+        - name: size
+          in: query
+          description: Results per page (maximum 500)
+          required: false
+          schema:
+            type: integer
+            default: 100
+            maximum: 500
+      responses:
+        '200':
+          description: Translations retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TranslationListResponse'
+        '401':
+          description: Unauthorized - invalid or missing API key
+        '429':
+          description: Rate limit exceeded
+  /api/v1/translations:
+    post:
+      operationId: createOrUpdateTranslation
+      summary: Create or Update Translation
+      description: >-
+        Creates a new translation or updates an existing one. Supports upsert
+        semantics - if the translation key already exists for the given language
+        and namespace, it will be updated.
+      tags:
+        - Translations
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TranslationRequest'
+      responses:
+        '200':
+          description: Translation created or updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TranslationResponse'
+        '400':
+          description: Invalid request body
+        '401':
+          description: Unauthorized - invalid or missing API key
+        '429':
+          description: Rate limit exceeded
+  /api/v1/languages:
+    get:
+      operationId: listLanguages
+      summary: List Languages
+      description: Retrieves all languages configured in the project.
+      tags:
+        - Languages
+      responses:
+        '200':
+          description: Languages retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LanguageListResponse'
+        '401':
+          description: Unauthorized - invalid or missing API key
+    post:
+      operationId: createLanguage
+      summary: Create Language
+      description: Creates a new language in the project with a unique language key.
+      tags:
+        - Languages
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateLanguageRequest'
+      responses:
+        '200':
+          description: Language created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LanguageResponse'
+        '400':
+          description: Invalid request or duplicate language key
+        '401':
+          description: Unauthorized - invalid or missing API key
+  /api/v1/languages/{languageKey}:
+    patch:
+      operationId: updateLanguage
+      summary: Update Language
+      description: Modifies an existing language's key or display name.
+      tags:
+        - Languages
+      parameters:
+        - name: languageKey
+          in: path
+          required: true
+          description: The language identifier to update
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateLanguageRequest'
+      responses:
+        '200':
+          description: Language updated successfully
+        '401':
+          description: Unauthorized - invalid or missing API key
+        '404':
+          description: Language not found
+    delete:
+      operationId: deleteLanguage
+      summary: Delete Language
+      description: >-
+        Removes a language from the project. This also removes all translations
+        for the given language.
+      tags:
+        - Languages
+      parameters:
+        - name: languageKey
+          in: path
+          required: true
+          description: The language identifier to delete
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Language deleted successfully
+        '401':
+          description: Unauthorized - invalid or missing API key
+        '404':
+          description: Language not found
+  /api/v2/projects:
+    get:
+      operationId: listProjects
+      summary: List Projects
+      description: >-
+        Retrieves all existing projects with their metadata, language
+        configurations, and translation statistics. Requires Personal Token
+        authentication.
+      tags:
+        - Projects
+      security:
+        - BearerAuth: []
+      responses:
+        '200':
+          description: Projects retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectListResponse'
+        '401':
+          description: Unauthorized - invalid or missing Personal Token
+    post:
+      operationId: createProject
+      summary: Create Project
+      description: >-
+        Creates a new translation project and returns project details including
+        API tokens and initial configuration. Requires Personal Token authentication.
+      tags:
+        - Projects
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateProjectRequest'
+      responses:
+        '200':
+          description: Project created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectResponse'
+        '400':
+          description: Invalid request body
+        '401':
+          description: Unauthorized - invalid or missing Personal Token
+  /api/v1/customers:
+    get:
+      operationId: listCustomers
+      summary: List Customers
+      description: Returns all available customers in the project.
+      tags:
+        - Customers
+      responses:
+        '200':
+          description: Customers retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerListResponse'
+        '401':
+          description: Unauthorized - invalid or missing API key
+    post:
+      operationId: createCustomer
+      summary: Create Customer
+      description: >-
+        Establishes a new customer record for project-specific translations.
+        Customer key must be unique and up to 40 characters.
+      tags:
+        - Customers
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateCustomerRequest'
+      responses:
+        '200':
+          description: Customer created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerResponse'
+        '400':
+          description: Invalid request or duplicate customer key
+        '401':
+          description: Unauthorized - invalid or missing API key
+  /api/v1/customers/{customerKey}:
+    get:
+      operationId: getCustomer
+      summary: Get Customer
+      description: Retrieves details for a specific customer by their key.
+      tags:
+        - Customers
+      parameters:
+        - name: customerKey
+          in: path
+          required: true
+          description: The unique customer identifier
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Customer retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerResponse'
+        '401':
+          description: Unauthorized - invalid or missing API key
+        '404':
+          description: Customer not found
+    patch:
+      operationId: updateCustomer
+      summary: Update Customer
+      description: Modifies an existing customer's key or description.
+      tags:
+        - Customers
+      parameters:
+        - name: customerKey
+          in: path
+          required: true
+          description: The unique customer identifier
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateCustomerRequest'
+      responses:
+        '200':
+          description: Customer updated successfully
+        '401':
+          description: Unauthorized - invalid or missing API key
+        '404':
+          description: Customer not found
+    delete:
+      operationId: deleteCustomer
+      summary: Delete Customer
+      description: Removes a customer record from the project.
+      tags:
+        - Customers
+      parameters:
+        - name: customerKey
+          in: path
+          required: true
+          description: The unique customer identifier
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Customer deleted successfully
+        '401':
+          description: Unauthorized - invalid or missing API key
+        '404':
+          description: Customer not found
+  /api/v1/import:
+    post:
+      operationId: importTranslations
+      summary: Import Translations
+      description: >-
+        Imports translation files in 30+ supported formats including JSON, YAML,
+        XLIFF, Android XML, iOS Strings, Java Properties, PHP, PO/POT, CSV,
+        Excel, and more. Rate limited to 60 req/min per project.
+      tags:
+        - Import
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+                  description: Translation file to import
+                uploadFormat:
+                  type: string
+                  description: File format identifier (e.g., single-language-json, multi-language-json)
+                languageKey:
+                  type: string
+                  description: Target language key (for single-language formats)
+                namespace:
+                  type: string
+                  description: Target namespace for imported translations
+      responses:
+        '200':
+          description: Import completed successfully
+        '400':
+          description: Invalid file or format
+        '401':
+          description: Unauthorized - invalid or missing API key
+        '429':
+          description: Rate limit exceeded
+  /api/v1/export:
+    get:
+      operationId: exportTranslations
+      summary: Export Translations
+      description: >-
+        Exports translation files in the requested format. Supports all 30+
+        format types and optional filtering by language, namespace, or customer.
+        Rate limited to 60 req/min per project.
+      tags:
+        - Export
+      parameters:
+        - name: downloadFormat
+          in: query
+          required: true
+          description: Target file format for export
+          schema:
+            type: string
+        - name: languageKey
+          in: query
+          description: Export only the specified language
+          required: false
+          schema:
+            type: string
+        - name: namespace
+          in: query
+          description: Export only the specified namespace
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Export file returned
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+        '401':
+          description: Unauthorized - invalid or missing API key
+        '429':
+          description: Rate limit exceeded
+  /api/v1/publish:
+    post:
+      operationId: publishTranslations
+      summary: Publish Translations
+      description: >-
+        Publishes translations to CDN environments (latest, production, or custom).
+        Rate limited to 10 req/min per project.
+      tags:
+        - Publication
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                environment:
+                  type: string
+                  description: Target CDN environment (latest, production, or custom name)
+                  default: latest
+      responses:
+        '200':
+          description: Publication triggered successfully
+        '401':
+          description: Unauthorized - invalid or missing API key
+        '429':
+          description: Rate limit exceeded
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-SimpleLocalize-Token
+      description: Project API key from Settings > Credentials > API Key
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: Personal Token for Projects API. Generated in account settings.
+  schemas:
+    Translation:
+      type: object
+      properties:
+        key:
+          type: string
+          description: Translation key identifier
+        namespace:
+          type: string
+          description: Translation namespace for organizing keys
+        language:
+          type: string
+          description: Language identifier (e.g., en, fr, de)
+        text:
+          type: string
+          description: The translated text
+        reviewStatus:
+          type: string
+          description: Review status of the translation
+          enum:
+            - REVIEWED
+            - NOT_REVIEWED
+        customerId:
+          type: string
+          description: Associated customer identifier for customer-specific translations
+        modifiedAt:
+          type: string
+          format: date-time
+          description: Timestamp of last modification
+    TranslationRequest:
+      type: object
+      required:
+        - key
+        - language
+      properties:
+        key:
+          type: string
+          description: Translation key identifier
+        namespace:
+          type: string
+          description: Translation namespace
+        language:
+          type: string
+          description: Target language identifier
+        text:
+          type: string
+          description: Translated text content
+    TranslationResponse:
+      type: object
+      properties:
+        status:
+          type: integer
+          description: HTTP status code
+        message:
+          type: string
+          description: Response message
+        data:
+          $ref: '#/components/schemas/Translation'
+    TranslationListResponse:
+      type: object
+      properties:
+        status:
+          type: integer
+        message:
+          type: string
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Translation'
+        page:
+          type: integer
+        totalPages:
+          type: integer
+        totalElements:
+          type: integer
+    Language:
+      type: object
+      properties:
+        key:
+          type: string
+          description: Unique language identifier (max 20 chars)
+        name:
+          type: string
+          description: Display name for the language (max 200 chars)
+    CreateLanguageRequest:
+      type: object
+      required:
+        - key
+      properties:
+        key:
+          type: string
+          description: Unique language key (max 20 characters)
+          maxLength: 20
+        name:
+          type: string
+          description: Language display name (max 200 characters)
+          maxLength: 200
+    UpdateLanguageRequest:
+      type: object
+      properties:
+        key:
+          type: string
+          description: New language key
+        name:
+          type: string
+          description: New language display name
+    LanguageResponse:
+      type: object
+      properties:
+        status:
+          type: integer
+        message:
+          type: string
+        data:
+          $ref: '#/components/schemas/Language'
+    LanguageListResponse:
+      type: object
+      properties:
+        status:
+          type: integer
+        message:
+          type: string
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Language'
+    Project:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Project unique identifier
+        name:
+          type: string
+          description: Project display name
+        apiKey:
+          type: string
+          description: Project-specific API key
+        createdAt:
+          type: string
+          format: date-time
+        languages:
+          type: array
+          items:
+            $ref: '#/components/schemas/Language'
+        translationCount:
+          type: integer
+    CreateProjectRequest:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: Project name
+    ProjectResponse:
+      type: object
+      properties:
+        status:
+          type: integer
+        message:
+          type: string
+        data:
+          $ref: '#/components/schemas/Project'
+    ProjectListResponse:
+      type: object
+      properties:
+        status:
+          type: integer
+        message:
+          type: string
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Project'
+    Customer:
+      type: object
+      properties:
+        key:
+          type: string
+          description: Unique customer identifier (max 40 chars)
+          maxLength: 40
+        description:
+          type: string
+          description: Customer details (max 255 chars)
+          maxLength: 255
+    CreateCustomerRequest:
+      type: object
+      required:
+        - key
+      properties:
+        key:
+          type: string
+          description: Unique customer identifier (max 40 characters)
+          maxLength: 40
+        description:
+          type: string
+          description: Customer details (max 255 characters)
+          maxLength: 255
+    UpdateCustomerRequest:
+      type: object
+      properties:
+        key:
+          type: string
+          description: New customer identifier
+        description:
+          type: string
+          description: Updated customer details
+    CustomerResponse:
+      type: object
+      properties:
+        status:
+          type: integer
+        message:
+          type: string
+        data:
+          $ref: '#/components/schemas/Customer'
+    CustomerListResponse:
+      type: object
+      properties:
+        status:
+          type: integer
+        message:
+          type: string
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Customer'

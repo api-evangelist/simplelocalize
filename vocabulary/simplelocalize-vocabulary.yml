@@ -1,0 +1,131 @@
+vocabulary:
+  name: SimpleLocalize Vocabulary
+  description: >-
+    Domain vocabulary for SimpleLocalize translation management platform,
+    covering core localization concepts, workflow terms, and technical constructs.
+  version: '1.0'
+  created: '2026-05-02'
+  modified: '2026-05-02'
+  terms:
+    - term: Translation
+      definition: >-
+        A string of text associated with a key, language, and optional namespace
+        that represents localized content for display in an application.
+      aliases:
+        - Translation String
+        - i18n String
+      related:
+        - Translation Key
+        - Language
+        - Namespace
+
+    - term: Translation Key
+      definition: >-
+        A unique identifier used in application code to reference a translation
+        string. Keys often use dot notation or SCREAMING_SNAKE_CASE conventions.
+      aliases:
+        - Key
+        - i18n Key
+        - Message Key
+
+    - term: Namespace
+      definition: >-
+        A logical grouping that organizes translation keys into functional
+        categories (e.g., common, navigation, checkout) to manage large
+        translation sets.
+      aliases:
+        - Module
+        - Category
+
+    - term: Language
+      definition: >-
+        A language configuration in a project, identified by an IETF language
+        tag (e.g., en, fr-FR, zh-Hans). Each language has its own set of
+        translations.
+      aliases:
+        - Locale
+        - Language Variant
+
+    - term: Project
+      definition: >-
+        A container for all translation data including languages, keys, and
+        namespaces. Each project has its own API key for authentication.
+      aliases:
+        - Translation Project
+        - Localization Project
+
+    - term: Customer
+      definition: >-
+        A customer segment record that enables white-label or multi-tenant
+        translation overrides. Customers can have custom translations that
+        override the default project translations.
+      aliases:
+        - Customer Segment
+        - Tenant
+
+    - term: API Key
+      definition: >-
+        A project-level authentication credential passed in the
+        X-SimpleLocalize-Token header to authenticate API requests.
+
+    - term: Personal Token
+      definition: >-
+        An account-level authentication credential used with Bearer authentication
+        for the Projects API. Up to 5 tokens can be generated per user.
+      aliases:
+        - Bearer Token
+        - Access Token
+
+    - term: Review Status
+      definition: >-
+        A workflow attribute indicating whether a translation has been reviewed
+        by a human translator. Values are REVIEWED or NOT_REVIEWED.
+      aliases:
+        - Review State
+        - Approval Status
+
+    - term: CDN Publication
+      definition: >-
+        The process of pushing translations to a content delivery network for
+        consumption by web and mobile applications at runtime.
+      aliases:
+        - Translation Hosting
+        - Publish
+
+    - term: Translation Hosting
+      definition: >-
+        SimpleLocalize's CDN-based service that serves translations as JSON
+        files to applications, supporting multiple environments (latest, production).
+
+    - term: Import
+      definition: >-
+        The process of uploading translation files in supported formats
+        (JSON, YAML, XLIFF, etc.) to populate or update project translations.
+
+    - term: Export
+      definition: >-
+        The process of downloading project translations in a chosen file format
+        for use in application builds or handoff to translation services.
+
+    - term: Auto-Translation
+      definition: >-
+        Automated translation using machine translation services (DeepL, Google
+        Translate, OpenAI) triggered via the API.
+      aliases:
+        - Machine Translation
+        - MT
+
+    - term: MCP Server
+      definition: >-
+        A Model Context Protocol server that enables AI assistants (Claude,
+        GitHub Copilot, Cursor) to interact with the SimpleLocalize API.
+
+    - term: Rate Limit
+      definition: >-
+        API usage constraints: 60 req/min per IP, 300 req/min per project
+        for general endpoints; 10 req/min per project for publication.
+
+    - term: File Format
+      definition: >-
+        One of 30+ supported translation file types including JSON, YAML,
+        XLIFF, Android XML, iOS Strings, Java Properties, PHP, PO/POT, CSV, Excel.

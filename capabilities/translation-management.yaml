@@ -1,0 +1,319 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "SimpleLocalize Translation Management"
+  description: >-
+    Unified translation management workflow for developers and localization teams.
+    Combines translation CRUD, language management, project management, customer
+    segmentation, and CDN publication into a single capability. Used by engineering
+    teams to automate localization pipelines in CI/CD and by localization managers
+    to manage multilingual content at scale.
+  tags:
+    - Localization
+    - Translation
+    - Internationalization
+    - Content Management
+  created: "2026-05-02"
+  modified: "2026-05-02"
+
+binds:
+  - namespace: env
+    keys:
+      SIMPLELOCALIZE_API_KEY: SIMPLELOCALIZE_API_KEY
+      SIMPLELOCALIZE_PERSONAL_TOKEN: SIMPLELOCALIZE_PERSONAL_TOKEN
+
+capability:
+  consumes:
+    - import: simplelocalize
+      location: ./shared/simplelocalize.yaml
+
+  exposes:
+    - type: rest
+      port: 8080
+      namespace: translation-management-api
+      description: "Unified REST API for SimpleLocalize translation management workflows."
+      resources:
+        - path: /v1/translations
+          name: translations
+          description: Manage translation strings
+          operations:
+            - method: GET
+              name: list-translations
+              description: List translations with filtering by language, key, or namespace
+              call: "simplelocalize.list-translations"
+              with:
+                language: "rest.language"
+                key: "rest.key"
+                namespace: "rest.namespace"
+                text: "rest.text"
+                textStatus: "rest.textStatus"
+                reviewsStatus: "rest.reviewsStatus"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: create-translation
+              description: Create or update a translation string
+              call: "simplelocalize.create-or-update-translation"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/languages
+          name: languages
+          description: Manage project languages
+          operations:
+            - method: GET
+              name: list-languages
+              description: List all languages in the project
+              call: "simplelocalize.list-languages"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: create-language
+              description: Add a new language to the project
+              call: "simplelocalize.create-language"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/languages/{languageKey}
+          name: language
+          description: Manage a specific language
+          operations:
+            - method: DELETE
+              name: delete-language
+              description: Remove a language and all its translations
+              call: "simplelocalize.delete-language"
+              with:
+                languageKey: "rest.languageKey"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/projects
+          name: projects
+          description: Manage translation projects
+          operations:
+            - method: GET
+              name: list-projects
+              description: List all translation projects
+              call: "simplelocalize.list-projects"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: create-project
+              description: Create a new translation project
+              call: "simplelocalize.create-project"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/customers
+          name: customers
+          description: Manage customer translation segments
+          operations:
+            - method: GET
+              name: list-customers
+              description: List all customer segments
+              call: "simplelocalize.list-customers"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: create-customer
+              description: Create a new customer segment
+              call: "simplelocalize.create-customer"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/customers/{customerKey}
+          name: customer
+          description: Manage a specific customer segment
+          operations:
+            - method: GET
+              name: get-customer
+              description: Retrieve a specific customer segment
+              call: "simplelocalize.get-customer"
+              with:
+                customerKey: "rest.customerKey"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: DELETE
+              name: delete-customer
+              description: Remove a customer segment
+              call: "simplelocalize.delete-customer"
+              with:
+                customerKey: "rest.customerKey"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/export
+          name: export
+          description: Export translations in various formats
+          operations:
+            - method: GET
+              name: export-translations
+              description: Export translations in the requested file format
+              call: "simplelocalize.export-translations"
+              with:
+                downloadFormat: "rest.downloadFormat"
+                languageKey: "rest.languageKey"
+                namespace: "rest.namespace"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/publish
+          name: publish
+          description: Publish translations to CDN
+          operations:
+            - method: POST
+              name: publish-translations
+              description: Publish translations to CDN environment
+              call: "simplelocalize.publish-translations"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9090
+      namespace: translation-management-mcp
+      transport: http
+      description: "MCP server for AI-assisted translation management and localization workflows."
+      tools:
+        - name: list-translations
+          description: Retrieve translations with filtering by language, key, namespace, or text content
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "simplelocalize.list-translations"
+          with:
+            language: "tools.language"
+            key: "tools.key"
+            namespace: "tools.namespace"
+            text: "tools.text"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-translation
+          description: Create or update a translation string for a specific language and key
+          hints:
+            readOnly: false
+            destructive: false
+          call: "simplelocalize.create-or-update-translation"
+          with:
+            key: "tools.key"
+            language: "tools.language"
+            namespace: "tools.namespace"
+            text: "tools.text"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-languages
+          description: List all languages configured in the translation project
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "simplelocalize.list-languages"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-language
+          description: Add a new language to the translation project
+          hints:
+            readOnly: false
+            destructive: false
+          call: "simplelocalize.create-language"
+          with:
+            key: "tools.key"
+            name: "tools.name"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: delete-language
+          description: Remove a language and all associated translations from the project
+          hints:
+            readOnly: false
+            destructive: true
+            idempotent: true
+          call: "simplelocalize.delete-language"
+          with:
+            languageKey: "tools.languageKey"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-projects
+          description: List all translation projects in the account
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "simplelocalize.list-projects"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-project
+          description: Create a new translation project
+          hints:
+            readOnly: false
+            destructive: false
+          call: "simplelocalize.create-project"
+          with:
+            name: "tools.name"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-customers
+          description: List all customer segments with their translation overrides
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "simplelocalize.list-customers"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-customer
+          description: Create a new customer segment for localized translation overrides
+          hints:
+            readOnly: false
+            destructive: false
+          call: "simplelocalize.create-customer"
+          with:
+            key: "tools.key"
+            description: "tools.description"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-customer
+          description: Get details for a specific customer segment
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "simplelocalize.get-customer"
+          with:
+            customerKey: "tools.customerKey"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: export-translations
+          description: Export translations in a specified file format (JSON, YAML, XLIFF, etc.)
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "simplelocalize.export-translations"
+          with:
+            downloadFormat: "tools.downloadFormat"
+            languageKey: "tools.languageKey"
+            namespace: "tools.namespace"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: publish-translations
+          description: Publish translations to CDN environment for production use
+          hints:
+            readOnly: false
+            destructive: false
+          call: "simplelocalize.publish-translations"
+          with:
+            environment: "tools.environment"
+          outputParameters:
+            - type: object
+              mapping: "$."
