@@ -1,0 +1,13 @@
+{
+  "repo": "simplelocalize",
+  "feeds": [
+    {
+      "source": "https://simplelocalize.io/blog/",
+      "feed_url": "https://simplelocalize.io/feed.xml",
+      "saved": 10,
+      "title": "SimpleLocalize Blog"
+    }
+  ],
+  "post_count": 10,
+  "fetched": "2026-05-03T23:36:41Z"
+}
