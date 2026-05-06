@@ -4,99 +4,50 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: SimpleLocalize
 providerId: simplelocalize
 created: '2026-05-04'
-modified: '2026-05-04'
+modified: '2026-05-05'
+reconciled: false
 tags:
   - Localization
   - Translation
   - Internationalization
   - Rate Limiting
-  - Quotas
-  - Throttling
-description: Machine-readable rate limit definitions for the SimpleLocalize API surface. Captures per-tier
-  quotas, burst behavior, response signaling, and recovery semantics. Defaults are scaffold values to
-  be replaced with published provider limits.
-headers:
-  limit: X-RateLimit-Limit
-  remaining: X-RateLimit-Remaining
-  reset: X-RateLimit-Reset
-  retryAfter: Retry-After
-  policy: RateLimit-Policy
+description: SimpleLocalize publishes plan-level capacity (translation keys, seats, auto-translation
+  character pools) on its pricing page but does not document numeric request-per-second/minute API
+  rate limits or rate-limit response headers in publicly reachable documentation. Plan caps belong in
+  the plans artifact; this artifact is left as a low-confidence stub until SimpleLocalize publishes
+  per-key request limits.
+sources:
+  - https://simplelocalize.io/pricing/
+  - https://simplelocalize.io/docs/
+notes: |
+  Provider's developer documentation surface (developer.simplelocalize.io) was not reachable at
+  reconciliation time and SimpleLocalize's pricing page does not enumerate numeric API rate limits.
+  Confirm via the official API reference before treating limits below as authoritative.
 responseCodes:
   throttled: 429
-  quotaExceeded: 429
-  serviceUnavailable: 503
 limits:
-  - tier: free
-    name: Free Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 10
-    burst: 20
-    timeFrame: minute
-    applies:
-      - SimpleLocalize Translation API
-      - SimpleLocalize Language API
-      - SimpleLocalize Projects API
-      - SimpleLocalize Customer API
-  - tier: free
-    name: Free Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 1000
-    timeFrame: month
-    applies:
-      - SimpleLocalize Translation API
-      - SimpleLocalize Language API
-      - SimpleLocalize Projects API
-      - SimpleLocalize Customer API
-  - tier: professional
-    name: Professional Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 100
-    burst: 200
-    timeFrame: minute
-    applies:
-      - SimpleLocalize Translation API
-      - SimpleLocalize Language API
-      - SimpleLocalize Projects API
-      - SimpleLocalize Customer API
-  - tier: professional
-    name: Professional Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 100000
-    timeFrame: month
-    applies:
-      - SimpleLocalize Translation API
-      - SimpleLocalize Language API
-      - SimpleLocalize Projects API
-      - SimpleLocalize Customer API
-  - tier: enterprise
-    name: Enterprise Negotiated Limit
-    scope: contract
-    metric: requests_per_minute
-    limit: 1000
-    burst: 5000
-    timeFrame: minute
-    applies:
-      - SimpleLocalize Translation API
-      - SimpleLocalize Language API
-      - SimpleLocalize Projects API
-      - SimpleLocalize Customer API
+  - name: Per-Account Request Throttling
+    scope: account
+    metric: varies
+    limit: 'see SimpleLocalize API documentation'
+    notes: Numeric per-second / per-minute request limits are not published on the pricing page.
+  - name: Translation Keys (Plan Cap)
+    scope: account
+    metric: varies
+    limit: 'plan-dependent (250 / 1,000 / 4,000 / 12,000)'
+    notes: Plan-tier caps; tracked authoritatively in plans/simplelocalize-plans-pricing.yml.
+  - name: Auto-Translation Character Pool
+    scope: account
+    metric: varies
+    limit: 'plan-dependent monthly top-up with rollover ceiling'
+    notes: Soft consumption cap on machine-translation characters; plan tier sets the ceiling.
 policies:
-  - name: Backoff Strategy
-    description: Clients should implement exponential backoff with jitter, honoring the Retry-After header
-      when present.
-  - name: Burst Handling
-    description: Short bursts above the steady-state limit are tolerated up to the documented burst ceiling
-      before throttling engages.
-  - name: Quota Reset
-    description: Monthly quotas reset at the start of each calendar month in UTC. Per-minute and per-second
-      windows reset on a sliding-window basis.
-  - name: Fair Use
-    description: Even on uncapped enterprise tiers, sustained usage that materially impacts shared infrastructure
-      may be subject to fair-use throttling.
+  - name: Plan-Tier Quotas
+    description: Capacity limits (translation keys, seats, languages, auto-translation characters)
+      are enforced at plan level and published on the pricing page.
+  - name: Backoff
+    description: When request-rate throttling does occur, clients should implement exponential backoff
+      with jitter and honor any Retry-After header the API returns.
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com

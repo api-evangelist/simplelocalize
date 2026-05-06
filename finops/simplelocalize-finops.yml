@@ -1,5 +1,6 @@
 specification: FinOps Framework
 specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
 alignedWith:
   framework: FinOps Foundation Framework
   frameworkUrl: https://www.finops.org/framework/
@@ -9,144 +10,78 @@ alignedWith:
 provider: SimpleLocalize
 providerId: simplelocalize
 publisherName: SimpleLocalize
-serviceCategory: API
+serviceCategory: Localization / Translation Management
 created: '2026-05-04'
-modified: '2026-05-04'
+modified: '2026-05-05'
+reconciled: true
 tags:
   - Localization
   - Translation
   - Internationalization
   - FinOps
-  - Cost Management
   - FOCUS
-description: FinOps framework definition for the SimpleLocalize API surface. Provides a FOCUS-aligned
-  mapping for cost allocation, usage measurement, and unit-economics reporting across the provider's APIs.
-principles:
-  - name: Visibility
-    description: Make API consumption costs visible to engineering, product, and finance teams in near
-      real-time.
-  - name: Allocation
-    description: Tag every chargeable API call with the consuming team, environment, application, and
-      feature so cost can be allocated.
-  - name: Optimization
-    description: Continuously evaluate request patterns, caching, batching, and tier selection to reduce
-      cost per useful unit of work.
-  - name: Accountability
-    description: Establish budget owners and chargeback or showback flows for each consuming team.
-domains:
-  - name: Understand Usage and Cost
-    capabilities:
-      - Data Ingestion
-      - Allocation
-      - Reporting and Analytics
-      - Anomaly Management
-  - name: Quantify Business Value
-    capabilities:
-      - Planning and Estimating
-      - Forecasting
-      - Budgeting
-      - Benchmarking
-      - Unit Economics
-  - name: Optimize Usage and Cost
-    capabilities:
-      - Architecting for Cloud
-      - Rate Optimization
-      - Workload Optimization
-      - Cloud Sustainability
-      - Licensing and SaaS
-  - name: Manage the FinOps Practice
-    capabilities:
-      - FinOps Practice Operations
-      - FinOps Education and Enablement
-      - Invoicing and Chargeback
-      - Onboarding Workloads
-      - Intersecting Disciplines
+description: 'FOCUS-aligned FinOps for SimpleLocalize: tiered EUR-denominated subscription with plan
+  caps on translation keys, seats, and auto-translation characters; enterprise plans negotiated.'
+sources:
+  - https://simplelocalize.io/pricing/
 billingModel:
-  pricingCategory: Usage-Based
+  pricingCategory: Tiered Subscription
   billingFrequency: Monthly
-  billingCurrency: USD
+  billingCurrency: EUR
   chargeCategories:
     - Usage
     - Purchase
     - Tax
-    - Credit
     - Adjustment
-  chargeFrequency: Recurring
 focusColumns:
   ServiceName: SimpleLocalize
-  ServiceCategory: Developer Tools / API
+  ServiceCategory: Localization / Translation Management
   ProviderName: SimpleLocalize
   PublisherName: SimpleLocalize
   InvoiceIssuerName: SimpleLocalize
-  PricingCategory: Usage-Based
-  PricingUnit: request
-  BillingCurrency: USD
+  BillingCurrency: EUR
   ChargeCategory: Usage
 meters:
-  - name: api_requests
-    description: Count of billable API requests
-    unit: request
+  - name: subscription_month
+    description: Monthly subscription fee for the selected plan tier (Developer, Team, Business).
+    unit: month
     aggregation: sum
     dimensions:
-      - api
-      - endpoint
-      - tier
-      - region
-      - consumer
-  - name: data_egress
-    description: Bytes returned over the network in API responses
-    unit: GB
+      - plan
+  - name: translation_keys
+    description: Active translation keys counted against the plan cap.
+    unit: varies
+    aggregation: max
+    dimensions:
+      - plan
+      - project
+  - name: auto_translation_characters
+    description: Machine-translation characters consumed against initial allowance plus monthly top-up.
+    unit: varies
     aggregation: sum
     dimensions:
-      - api
-      - region
-      - consumer
-  - name: compute_seconds
-    description: Server-side compute consumed by the request, where applicable
-    unit: second
-    aggregation: sum
+      - plan
+      - language_pair
+  - name: team_seats
+    description: Team-member seats provisioned against the plan cap.
+    unit: seat
+    aggregation: max
     dimensions:
-      - api
-      - endpoint
-      - tier
-apis:
-  - name: SimpleLocalize Translation API
-    baseURL: https://api.simplelocalize.io
-    tags:
-      - Translation
-      - Localization
-      - Import
-      - Export
-    serviceName: SimpleLocalize Translation API
-    serviceCategory: API
-  - name: SimpleLocalize Language API
-    baseURL: https://api.simplelocalize.io
-    tags:
-      - Languages
-      - Localization
-    serviceName: SimpleLocalize Language API
-    serviceCategory: API
-  - name: SimpleLocalize Projects API
-    baseURL: https://api.simplelocalize.io
-    tags:
-      - Projects
-      - Management
-    serviceName: SimpleLocalize Projects API
-    serviceCategory: API
-  - name: SimpleLocalize Customer API
-    baseURL: https://api.simplelocalize.io
-    tags:
-      - Customers
-      - Localization
-    serviceName: SimpleLocalize Customer API
-    serviceCategory: API
-unitEconomics:
-  - name: Cost per 1K Requests
-    metric: billed_cost / (api_requests / 1000)
-    target: TBD
-  - name: Cost per Active Consumer
-    metric: billed_cost / active_consumers
-    target: TBD
+      - plan
+principles:
+  - name: Visibility
+    description: Track translation-key utilization and auto-translation character burn against plan
+      caps via the SimpleLocalize dashboard; alert before keys, seats, or character pool exhaust.
+  - name: Allocation
+    description: Allocate cost per project (each project maps to a product or customer locale set)
+      and per team member where seat economics matter.
+  - name: Optimization
+    description: Audit unused translation keys and stale languages to stay within tier caps; batch
+      auto-translation runs to make best use of the rolling character pool before paying for higher
+      tiers.
+  - name: Accountability
+    description: Localization owner reviews monthly key/seat/character utilization and approves tier
+      upgrades or downgrades based on observed activity-log trends.
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
