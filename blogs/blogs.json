@@ -4,10 +4,10 @@
     {
       "source": "https://simplelocalize.io/blog/",
       "feed_url": "https://simplelocalize.io/feed.xml",
-      "saved": 10,
-      "title": "SimpleLocalize Blog"
+      "title": "SimpleLocalize Blog",
+      "saved": 0
     }
   ],
   "post_count": 10,
-  "fetched": "2026-05-03T23:36:41Z"
+  "fetched": "2026-05-09T20:17:51Z"
 }
