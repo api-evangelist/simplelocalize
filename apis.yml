@@ -119,6 +119,14 @@ common:
   - type: PrivacyPolicy
     url: https://simplelocalize.io/privacy-policy/
 
+  - type: Integrations
+    url: https://simplelocalize.io/integrations/
+integrations:
+  - name: Figma
+  - name: VS Code
+  - name: IntelliJ
+  - name: Shopify
+  - name: Webflow
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
