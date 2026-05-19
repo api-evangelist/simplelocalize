@@ -1,0 +1,80 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: SimpleLocalize API — Import
+  description: 'SimpleLocalize API — Import. 1 operations. Lead operation: Import Translations. Self-contained Naftiko capability
+    covering one Simplelocalize business surface.'
+  tags:
+  - Simplelocalize
+  - Import
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SIMPLELOCALIZE_API_KEY: SIMPLELOCALIZE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: simplelocalize-import
+    baseUri: https://api.simplelocalize.io
+    description: SimpleLocalize API — Import business capability. Self-contained, no shared references.
+    resources:
+    - name: api-v1-import
+      path: /api/v1/import
+      operations:
+      - name: importtranslations
+        method: POST
+        description: Import Translations
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.SIMPLELOCALIZE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: simplelocalize-import-rest
+    port: 8080
+    description: REST adapter for SimpleLocalize API — Import. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/api/v1/import
+      name: api-v1-import
+      description: REST surface for api-v1-import.
+      operations:
+      - method: POST
+        name: importtranslations
+        description: Import Translations
+        call: simplelocalize-import.importtranslations
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: simplelocalize-import-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for SimpleLocalize API — Import. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: import-translations
+      description: Import Translations
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: simplelocalize-import.importtranslations
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

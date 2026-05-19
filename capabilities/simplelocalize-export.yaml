@@ -1,0 +1,92 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: SimpleLocalize API — Export
+  description: 'SimpleLocalize API — Export. 1 operations. Lead operation: Export Translations. Self-contained Naftiko capability
+    covering one Simplelocalize business surface.'
+  tags:
+  - Simplelocalize
+  - Export
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SIMPLELOCALIZE_API_KEY: SIMPLELOCALIZE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: simplelocalize-export
+    baseUri: https://api.simplelocalize.io
+    description: SimpleLocalize API — Export business capability. Self-contained, no shared references.
+    resources:
+    - name: api-v1-export
+      path: /api/v1/export
+      operations:
+      - name: exporttranslations
+        method: GET
+        description: Export Translations
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: downloadFormat
+          in: query
+          type: string
+          description: Target file format for export
+          required: true
+        - name: languageKey
+          in: query
+          type: string
+          description: Export only the specified language
+        - name: namespace
+          in: query
+          type: string
+          description: Export only the specified namespace
+    authentication:
+      type: bearer
+      token: '{{env.SIMPLELOCALIZE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: simplelocalize-export-rest
+    port: 8080
+    description: REST adapter for SimpleLocalize API — Export. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/api/v1/export
+      name: api-v1-export
+      description: REST surface for api-v1-export.
+      operations:
+      - method: GET
+        name: exporttranslations
+        description: Export Translations
+        call: simplelocalize-export.exporttranslations
+        with:
+          downloadFormat: rest.downloadFormat
+          languageKey: rest.languageKey
+          namespace: rest.namespace
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: simplelocalize-export-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for SimpleLocalize API — Export. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: export-translations
+      description: Export Translations
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: simplelocalize-export.exporttranslations
+      with:
+        downloadFormat: tools.downloadFormat
+        languageKey: tools.languageKey
+        namespace: tools.namespace
+      outputParameters:
+      - type: object
+        mapping: $.

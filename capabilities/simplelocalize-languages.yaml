@@ -1,0 +1,189 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: SimpleLocalize API — Languages
+  description: 'SimpleLocalize API — Languages. 4 operations. Lead operation: List Languages. Self-contained Naftiko capability
+    covering one Simplelocalize business surface.'
+  tags:
+  - Simplelocalize
+  - Languages
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SIMPLELOCALIZE_API_KEY: SIMPLELOCALIZE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: simplelocalize-languages
+    baseUri: https://api.simplelocalize.io
+    description: SimpleLocalize API — Languages business capability. Self-contained, no shared references.
+    resources:
+    - name: api-v1-languages
+      path: /api/v1/languages
+      operations:
+      - name: listlanguages
+        method: GET
+        description: List Languages
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createlanguage
+        method: POST
+        description: Create Language
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-languages-languageKey
+      path: /api/v1/languages/{languageKey}
+      operations:
+      - name: updatelanguage
+        method: PATCH
+        description: Update Language
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: languageKey
+          in: path
+          type: string
+          description: The language identifier to update
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deletelanguage
+        method: DELETE
+        description: Delete Language
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: languageKey
+          in: path
+          type: string
+          description: The language identifier to delete
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.SIMPLELOCALIZE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: simplelocalize-languages-rest
+    port: 8080
+    description: REST adapter for SimpleLocalize API — Languages. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/api/v1/languages
+      name: api-v1-languages
+      description: REST surface for api-v1-languages.
+      operations:
+      - method: GET
+        name: listlanguages
+        description: List Languages
+        call: simplelocalize-languages.listlanguages
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createlanguage
+        description: Create Language
+        call: simplelocalize-languages.createlanguage
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/languages/{languagekey}
+      name: api-v1-languages-languagekey
+      description: REST surface for api-v1-languages-languageKey.
+      operations:
+      - method: PATCH
+        name: updatelanguage
+        description: Update Language
+        call: simplelocalize-languages.updatelanguage
+        with:
+          languageKey: rest.languageKey
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deletelanguage
+        description: Delete Language
+        call: simplelocalize-languages.deletelanguage
+        with:
+          languageKey: rest.languageKey
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: simplelocalize-languages-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for SimpleLocalize API — Languages. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: list-languages
+      description: List Languages
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: simplelocalize-languages.listlanguages
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-language
+      description: Create Language
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: simplelocalize-languages.createlanguage
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-language
+      description: Update Language
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: simplelocalize-languages.updatelanguage
+      with:
+        languageKey: tools.languageKey
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-language
+      description: Delete Language
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: simplelocalize-languages.deletelanguage
+      with:
+        languageKey: tools.languageKey
+      outputParameters:
+      - type: object
+        mapping: $.

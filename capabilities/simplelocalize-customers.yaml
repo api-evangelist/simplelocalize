@@ -1,0 +1,224 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: SimpleLocalize API — Customers
+  description: 'SimpleLocalize API — Customers. 5 operations. Lead operation: List Customers. Self-contained Naftiko capability
+    covering one Simplelocalize business surface.'
+  tags:
+  - Simplelocalize
+  - Customers
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SIMPLELOCALIZE_API_KEY: SIMPLELOCALIZE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: simplelocalize-customers
+    baseUri: https://api.simplelocalize.io
+    description: SimpleLocalize API — Customers business capability. Self-contained, no shared references.
+    resources:
+    - name: api-v1-customers
+      path: /api/v1/customers
+      operations:
+      - name: listcustomers
+        method: GET
+        description: List Customers
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createcustomer
+        method: POST
+        description: Create Customer
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-customerKey
+      path: /api/v1/customers/{customerKey}
+      operations:
+      - name: getcustomer
+        method: GET
+        description: Get Customer
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: customerKey
+          in: path
+          type: string
+          description: The unique customer identifier
+          required: true
+      - name: updatecustomer
+        method: PATCH
+        description: Update Customer
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: customerKey
+          in: path
+          type: string
+          description: The unique customer identifier
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deletecustomer
+        method: DELETE
+        description: Delete Customer
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: customerKey
+          in: path
+          type: string
+          description: The unique customer identifier
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.SIMPLELOCALIZE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: simplelocalize-customers-rest
+    port: 8080
+    description: REST adapter for SimpleLocalize API — Customers. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/api/v1/customers
+      name: api-v1-customers
+      description: REST surface for api-v1-customers.
+      operations:
+      - method: GET
+        name: listcustomers
+        description: List Customers
+        call: simplelocalize-customers.listcustomers
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createcustomer
+        description: Create Customer
+        call: simplelocalize-customers.createcustomer
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{customerkey}
+      name: api-v1-customers-customerkey
+      description: REST surface for api-v1-customers-customerKey.
+      operations:
+      - method: GET
+        name: getcustomer
+        description: Get Customer
+        call: simplelocalize-customers.getcustomer
+        with:
+          customerKey: rest.customerKey
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: updatecustomer
+        description: Update Customer
+        call: simplelocalize-customers.updatecustomer
+        with:
+          customerKey: rest.customerKey
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deletecustomer
+        description: Delete Customer
+        call: simplelocalize-customers.deletecustomer
+        with:
+          customerKey: rest.customerKey
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: simplelocalize-customers-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for SimpleLocalize API — Customers. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: list-customers
+      description: List Customers
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: simplelocalize-customers.listcustomers
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-customer
+      description: Create Customer
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: simplelocalize-customers.createcustomer
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-customer
+      description: Get Customer
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: simplelocalize-customers.getcustomer
+      with:
+        customerKey: tools.customerKey
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-customer
+      description: Update Customer
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: simplelocalize-customers.updatecustomer
+      with:
+        customerKey: tools.customerKey
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-customer
+      description: Delete Customer
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: simplelocalize-customers.deletecustomer
+      with:
+        customerKey: tools.customerKey
+      outputParameters:
+      - type: object
+        mapping: $.
