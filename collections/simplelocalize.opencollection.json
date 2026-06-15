@@ -1,0 +1,427 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SimpleLocalize API",
+    "version": "v2"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-SimpleLocalize-Token",
+      "value": "{{X-SimpleLocalize-Token}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Translations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Translations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.simplelocalize.io/api/v2/translations",
+            "params": [
+              {
+                "name": "text",
+                "value": "",
+                "type": "query",
+                "description": "Search translated text using case-insensitive partial matching"
+              },
+              {
+                "name": "textStatus",
+                "value": "",
+                "type": "query",
+                "description": "Filter by translation completeness"
+              },
+              {
+                "name": "reviewsStatus",
+                "value": "",
+                "type": "query",
+                "description": "Filter by review status"
+              },
+              {
+                "name": "key",
+                "value": "",
+                "type": "query",
+                "description": "Exact match filter for translation key"
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "query",
+                "description": "Exact match filter for translation namespace"
+              },
+              {
+                "name": "language",
+                "value": "",
+                "type": "query",
+                "description": "Exact match filter for language identifier"
+              },
+              {
+                "name": "customerId",
+                "value": "",
+                "type": "query",
+                "description": "Filter for customer-specific translations"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pagination page number"
+              },
+              {
+                "name": "size",
+                "value": "",
+                "type": "query",
+                "description": "Results per page (maximum 500)"
+              }
+            ]
+          },
+          "docs": "Retrieve translations with filtering and pagination. Supports filtering by key, language, namespace, text content, review status, and customer ID. Returns paginated results with up to 500 items per page."
+        },
+        {
+          "info": {
+            "name": "Create or Update Translation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.simplelocalize.io/api/v1/translations",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new translation or updates an existing one. Supports upsert semantics - if the translation key already exists for the given language and namespace, it will be updated."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Languages",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Languages",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.simplelocalize.io/api/v1/languages"
+          },
+          "docs": "Retrieves all languages configured in the project."
+        },
+        {
+          "info": {
+            "name": "Create Language",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.simplelocalize.io/api/v1/languages",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new language in the project with a unique language key."
+        },
+        {
+          "info": {
+            "name": "Update Language",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.simplelocalize.io/api/v1/languages/:languageKey",
+            "params": [
+              {
+                "name": "languageKey",
+                "value": "",
+                "type": "path",
+                "description": "The language identifier to update"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Modifies an existing language's key or display name."
+        },
+        {
+          "info": {
+            "name": "Delete Language",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.simplelocalize.io/api/v1/languages/:languageKey",
+            "params": [
+              {
+                "name": "languageKey",
+                "value": "",
+                "type": "path",
+                "description": "The language identifier to delete"
+              }
+            ]
+          },
+          "docs": "Removes a language from the project. This also removes all translations for the given language."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Projects",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Projects",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.simplelocalize.io/api/v2/projects",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieves all existing projects with their metadata, language configurations, and translation statistics. Requires Personal Token authentication."
+        },
+        {
+          "info": {
+            "name": "Create Project",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.simplelocalize.io/api/v2/projects",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates a new translation project and returns project details including API tokens and initial configuration. Requires Personal Token authentication."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Customers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Customers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.simplelocalize.io/api/v1/customers"
+          },
+          "docs": "Returns all available customers in the project."
+        },
+        {
+          "info": {
+            "name": "Create Customer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.simplelocalize.io/api/v1/customers",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Establishes a new customer record for project-specific translations. Customer key must be unique and up to 40 characters."
+        },
+        {
+          "info": {
+            "name": "Get Customer",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.simplelocalize.io/api/v1/customers/:customerKey",
+            "params": [
+              {
+                "name": "customerKey",
+                "value": "",
+                "type": "path",
+                "description": "The unique customer identifier"
+              }
+            ]
+          },
+          "docs": "Retrieves details for a specific customer by their key."
+        },
+        {
+          "info": {
+            "name": "Update Customer",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.simplelocalize.io/api/v1/customers/:customerKey",
+            "params": [
+              {
+                "name": "customerKey",
+                "value": "",
+                "type": "path",
+                "description": "The unique customer identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Modifies an existing customer's key or description."
+        },
+        {
+          "info": {
+            "name": "Delete Customer",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.simplelocalize.io/api/v1/customers/:customerKey",
+            "params": [
+              {
+                "name": "customerKey",
+                "value": "",
+                "type": "path",
+                "description": "The unique customer identifier"
+              }
+            ]
+          },
+          "docs": "Removes a customer record from the project."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Import",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Import Translations",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.simplelocalize.io/api/v1/import",
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "file",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "uploadFormat",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "languageKey",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "namespace",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Imports translation files in 30+ supported formats including JSON, YAML, XLIFF, Android XML, iOS Strings, Java Properties, PHP, PO/POT, CSV, Excel, and more. Rate limited to 60 req/min per project."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Export",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Export Translations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.simplelocalize.io/api/v1/export",
+            "params": [
+              {
+                "name": "downloadFormat",
+                "value": "",
+                "type": "query",
+                "description": "Target file format for export"
+              },
+              {
+                "name": "languageKey",
+                "value": "",
+                "type": "query",
+                "description": "Export only the specified language"
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "query",
+                "description": "Export only the specified namespace"
+              }
+            ]
+          },
+          "docs": "Exports translation files in the requested format. Supports all 30+ format types and optional filtering by language, namespace, or customer. Rate limited to 60 req/min per project."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Publication",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Publish Translations",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.simplelocalize.io/api/v1/publish",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Publishes translations to CDN environments (latest, production, or custom). Rate limited to 10 req/min per project."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
