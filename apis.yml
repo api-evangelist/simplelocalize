@@ -105,7 +105,7 @@ common:
     url: https://github.com/simplelocalize/vscode-simplelocalize
   - type: MCP
     url: https://github.com/simplelocalize/simplelocalize-mcp-server
-  - type: SDK
+  - type: SDKs
     url: https://github.com/simplelocalize/simplelocalize-cli-npm
   - type: TermsOfService
     url: https://simplelocalize.io/terms-of-service/
