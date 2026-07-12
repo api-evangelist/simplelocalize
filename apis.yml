@@ -85,6 +85,12 @@ apis:
       - type: Documentation
         url: https://simplelocalize.io/docs/api/customer-specific-api/
 common:
+  - type: VulnerabilityDisclosure
+    url: security/simplelocalize-vulnerability-disclosure.yml
+  - type: DomainSecurity
+    url: security/simplelocalize-domain-security.yml
+  - type: Authentication
+    url: authentication/simplelocalize-authentication.yml
   - type: LinkedIn
     url: https://www.linkedin.com/company/simplelocalize
   - type: Website

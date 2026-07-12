@@ -1,0 +1,23 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/simplelocalize-openapi.yml
+summary:
+  types:
+  - apiKey
+  - http
+  api_key_in:
+  - header
+schemes:
+- name: ApiKeyAuth
+  type: apiKey
+  in: header
+  parameter: X-SimpleLocalize-Token
+  description: Project API key from Settings > Credentials > API Key
+  sources:
+  - openapi/simplelocalize-openapi.yml
+- name: BearerAuth
+  type: http
+  scheme: bearer
+  description: Personal Token for Projects API. Generated in account settings.
+  sources:
+  - openapi/simplelocalize-openapi.yml
