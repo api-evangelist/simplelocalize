@@ -85,6 +85,8 @@ apis:
       - type: Documentation
         url: https://simplelocalize.io/docs/api/customer-specific-api/
 common:
+  - type: AgenticAccess
+    url: agentic-access/simplelocalize-agentic-access.yml
   - type: VulnerabilityDisclosure
     url: security/simplelocalize-vulnerability-disclosure.yml
   - type: DomainSecurity
