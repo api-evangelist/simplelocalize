@@ -1,0 +1,60 @@
+openapi: 3.1.0
+info:
+  title: SimpleLocalize Customers Publication API
+  description: The SimpleLocalize API is a REST API for managing translations, languages, projects, and customers. It enables developers to create, read, update, and delete translations programmatically, import and export translation files in 30+ formats, auto-translate using DeepL, Google Translate, or OpenAI, and publish translations to CDN for use in web, mobile, and backend applications.
+  version: v2
+  contact:
+    name: SimpleLocalize Support
+    url: https://simplelocalize.io/contact/
+  termsOfService: https://simplelocalize.io/terms-of-service/
+  license:
+    name: Commercial
+    url: https://simplelocalize.io/terms-of-service/
+servers:
+- url: https://api.simplelocalize.io
+  description: SimpleLocalize Production API
+security:
+- ApiKeyAuth: []
+tags:
+- name: Publication
+  description: Publish translations to CDN environments
+paths:
+  /api/v1/publish:
+    post:
+      operationId: publishTranslations
+      summary: Publish Translations
+      description: Publishes translations to CDN environments (latest, production, or custom). Rate limited to 10 req/min per project.
+      tags:
+      - Publication
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                environment:
+                  type: string
+                  description: Target CDN environment (latest, production, or custom name)
+                  default: latest
+      responses:
+        '200':
+          description: Publication triggered successfully
+        '401':
+          description: Unauthorized - invalid or missing API key
+        '429':
+          description: Rate limit exceeded
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-SimpleLocalize-Token
+      description: Project API key from Settings > Credentials > API Key
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: Personal Token for Projects API. Generated in account settings.
+externalDocs:
+  description: SimpleLocalize API Documentation
+  url: https://simplelocalize.io/docs/api/get-started/

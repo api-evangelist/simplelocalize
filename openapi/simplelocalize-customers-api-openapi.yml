@@ -1,0 +1,199 @@
+openapi: 3.1.0
+info:
+  title: SimpleLocalize Customers API
+  description: The SimpleLocalize API is a REST API for managing translations, languages, projects, and customers. It enables developers to create, read, update, and delete translations programmatically, import and export translation files in 30+ formats, auto-translate using DeepL, Google Translate, or OpenAI, and publish translations to CDN for use in web, mobile, and backend applications.
+  version: v2
+  contact:
+    name: SimpleLocalize Support
+    url: https://simplelocalize.io/contact/
+  termsOfService: https://simplelocalize.io/terms-of-service/
+  license:
+    name: Commercial
+    url: https://simplelocalize.io/terms-of-service/
+servers:
+- url: https://api.simplelocalize.io
+  description: SimpleLocalize Production API
+security:
+- ApiKeyAuth: []
+tags:
+- name: Customers
+  description: Manage customer-specific translation segments
+paths:
+  /api/v1/customers:
+    get:
+      operationId: listCustomers
+      summary: List Customers
+      description: Returns all available customers in the project.
+      tags:
+      - Customers
+      responses:
+        '200':
+          description: Customers retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerListResponse'
+        '401':
+          description: Unauthorized - invalid or missing API key
+    post:
+      operationId: createCustomer
+      summary: Create Customer
+      description: Establishes a new customer record for project-specific translations. Customer key must be unique and up to 40 characters.
+      tags:
+      - Customers
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateCustomerRequest'
+      responses:
+        '200':
+          description: Customer created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerResponse'
+        '400':
+          description: Invalid request or duplicate customer key
+        '401':
+          description: Unauthorized - invalid or missing API key
+  /api/v1/customers/{customerKey}:
+    get:
+      operationId: getCustomer
+      summary: Get Customer
+      description: Retrieves details for a specific customer by their key.
+      tags:
+      - Customers
+      parameters:
+      - name: customerKey
+        in: path
+        required: true
+        description: The unique customer identifier
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Customer retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerResponse'
+        '401':
+          description: Unauthorized - invalid or missing API key
+        '404':
+          description: Customer not found
+    patch:
+      operationId: updateCustomer
+      summary: Update Customer
+      description: Modifies an existing customer's key or description.
+      tags:
+      - Customers
+      parameters:
+      - name: customerKey
+        in: path
+        required: true
+        description: The unique customer identifier
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateCustomerRequest'
+      responses:
+        '200':
+          description: Customer updated successfully
+        '401':
+          description: Unauthorized - invalid or missing API key
+        '404':
+          description: Customer not found
+    delete:
+      operationId: deleteCustomer
+      summary: Delete Customer
+      description: Removes a customer record from the project.
+      tags:
+      - Customers
+      parameters:
+      - name: customerKey
+        in: path
+        required: true
+        description: The unique customer identifier
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Customer deleted successfully
+        '401':
+          description: Unauthorized - invalid or missing API key
+        '404':
+          description: Customer not found
+components:
+  schemas:
+    CustomerResponse:
+      type: object
+      properties:
+        status:
+          type: integer
+        message:
+          type: string
+        data:
+          $ref: '#/components/schemas/Customer'
+    CustomerListResponse:
+      type: object
+      properties:
+        status:
+          type: integer
+        message:
+          type: string
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Customer'
+    UpdateCustomerRequest:
+      type: object
+      properties:
+        key:
+          type: string
+          description: New customer identifier
+        description:
+          type: string
+          description: Updated customer details
+    Customer:
+      type: object
+      properties:
+        key:
+          type: string
+          description: Unique customer identifier (max 40 chars)
+          maxLength: 40
+        description:
+          type: string
+          description: Customer details (max 255 chars)
+          maxLength: 255
+    CreateCustomerRequest:
+      type: object
+      required:
+      - key
+      properties:
+        key:
+          type: string
+          description: Unique customer identifier (max 40 characters)
+          maxLength: 40
+        description:
+          type: string
+          description: Customer details (max 255 characters)
+          maxLength: 255
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-SimpleLocalize-Token
+      description: Project API key from Settings > Credentials > API Key
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: Personal Token for Projects API. Generated in account settings.
+externalDocs:
+  description: SimpleLocalize API Documentation
+  url: https://simplelocalize.io/docs/api/get-started/

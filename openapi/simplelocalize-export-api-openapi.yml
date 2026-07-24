@@ -1,0 +1,73 @@
+openapi: 3.1.0
+info:
+  title: SimpleLocalize Customers Export API
+  description: The SimpleLocalize API is a REST API for managing translations, languages, projects, and customers. It enables developers to create, read, update, and delete translations programmatically, import and export translation files in 30+ formats, auto-translate using DeepL, Google Translate, or OpenAI, and publish translations to CDN for use in web, mobile, and backend applications.
+  version: v2
+  contact:
+    name: SimpleLocalize Support
+    url: https://simplelocalize.io/contact/
+  termsOfService: https://simplelocalize.io/terms-of-service/
+  license:
+    name: Commercial
+    url: https://simplelocalize.io/terms-of-service/
+servers:
+- url: https://api.simplelocalize.io
+  description: SimpleLocalize Production API
+security:
+- ApiKeyAuth: []
+tags:
+- name: Export
+  description: Export translation files in various formats
+paths:
+  /api/v1/export:
+    get:
+      operationId: exportTranslations
+      summary: Export Translations
+      description: Exports translation files in the requested format. Supports all 30+ format types and optional filtering by language, namespace, or customer. Rate limited to 60 req/min per project.
+      tags:
+      - Export
+      parameters:
+      - name: downloadFormat
+        in: query
+        required: true
+        description: Target file format for export
+        schema:
+          type: string
+      - name: languageKey
+        in: query
+        description: Export only the specified language
+        required: false
+        schema:
+          type: string
+      - name: namespace
+        in: query
+        description: Export only the specified namespace
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Export file returned
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+        '401':
+          description: Unauthorized - invalid or missing API key
+        '429':
+          description: Rate limit exceeded
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-SimpleLocalize-Token
+      description: Project API key from Settings > Credentials > API Key
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: Personal Token for Projects API. Generated in account settings.
+externalDocs:
+  description: SimpleLocalize API Documentation
+  url: https://simplelocalize.io/docs/api/get-started/

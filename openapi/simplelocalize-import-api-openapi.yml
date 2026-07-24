@@ -1,0 +1,71 @@
+openapi: 3.1.0
+info:
+  title: SimpleLocalize Customers Import API
+  description: The SimpleLocalize API is a REST API for managing translations, languages, projects, and customers. It enables developers to create, read, update, and delete translations programmatically, import and export translation files in 30+ formats, auto-translate using DeepL, Google Translate, or OpenAI, and publish translations to CDN for use in web, mobile, and backend applications.
+  version: v2
+  contact:
+    name: SimpleLocalize Support
+    url: https://simplelocalize.io/contact/
+  termsOfService: https://simplelocalize.io/terms-of-service/
+  license:
+    name: Commercial
+    url: https://simplelocalize.io/terms-of-service/
+servers:
+- url: https://api.simplelocalize.io
+  description: SimpleLocalize Production API
+security:
+- ApiKeyAuth: []
+tags:
+- name: Import
+  description: Import translation files in various formats
+paths:
+  /api/v1/import:
+    post:
+      operationId: importTranslations
+      summary: Import Translations
+      description: Imports translation files in 30+ supported formats including JSON, YAML, XLIFF, Android XML, iOS Strings, Java Properties, PHP, PO/POT, CSV, Excel, and more. Rate limited to 60 req/min per project.
+      tags:
+      - Import
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+                  description: Translation file to import
+                uploadFormat:
+                  type: string
+                  description: File format identifier (e.g., single-language-json, multi-language-json)
+                languageKey:
+                  type: string
+                  description: Target language key (for single-language formats)
+                namespace:
+                  type: string
+                  description: Target namespace for imported translations
+      responses:
+        '200':
+          description: Import completed successfully
+        '400':
+          description: Invalid file or format
+        '401':
+          description: Unauthorized - invalid or missing API key
+        '429':
+          description: Rate limit exceeded
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-SimpleLocalize-Token
+      description: Project API key from Settings > Credentials > API Key
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: Personal Token for Projects API. Generated in account settings.
+externalDocs:
+  description: SimpleLocalize API Documentation
+  url: https://simplelocalize.io/docs/api/get-started/

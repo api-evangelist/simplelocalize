@@ -1,0 +1,173 @@
+openapi: 3.1.0
+info:
+  title: SimpleLocalize Customers Languages API
+  description: The SimpleLocalize API is a REST API for managing translations, languages, projects, and customers. It enables developers to create, read, update, and delete translations programmatically, import and export translation files in 30+ formats, auto-translate using DeepL, Google Translate, or OpenAI, and publish translations to CDN for use in web, mobile, and backend applications.
+  version: v2
+  contact:
+    name: SimpleLocalize Support
+    url: https://simplelocalize.io/contact/
+  termsOfService: https://simplelocalize.io/terms-of-service/
+  license:
+    name: Commercial
+    url: https://simplelocalize.io/terms-of-service/
+servers:
+- url: https://api.simplelocalize.io
+  description: SimpleLocalize Production API
+security:
+- ApiKeyAuth: []
+tags:
+- name: Languages
+  description: Manage project languages
+paths:
+  /api/v1/languages:
+    get:
+      operationId: listLanguages
+      summary: List Languages
+      description: Retrieves all languages configured in the project.
+      tags:
+      - Languages
+      responses:
+        '200':
+          description: Languages retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LanguageListResponse'
+        '401':
+          description: Unauthorized - invalid or missing API key
+    post:
+      operationId: createLanguage
+      summary: Create Language
+      description: Creates a new language in the project with a unique language key.
+      tags:
+      - Languages
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateLanguageRequest'
+      responses:
+        '200':
+          description: Language created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LanguageResponse'
+        '400':
+          description: Invalid request or duplicate language key
+        '401':
+          description: Unauthorized - invalid or missing API key
+  /api/v1/languages/{languageKey}:
+    patch:
+      operationId: updateLanguage
+      summary: Update Language
+      description: Modifies an existing language's key or display name.
+      tags:
+      - Languages
+      parameters:
+      - name: languageKey
+        in: path
+        required: true
+        description: The language identifier to update
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateLanguageRequest'
+      responses:
+        '200':
+          description: Language updated successfully
+        '401':
+          description: Unauthorized - invalid or missing API key
+        '404':
+          description: Language not found
+    delete:
+      operationId: deleteLanguage
+      summary: Delete Language
+      description: Removes a language from the project. This also removes all translations for the given language.
+      tags:
+      - Languages
+      parameters:
+      - name: languageKey
+        in: path
+        required: true
+        description: The language identifier to delete
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Language deleted successfully
+        '401':
+          description: Unauthorized - invalid or missing API key
+        '404':
+          description: Language not found
+components:
+  schemas:
+    LanguageResponse:
+      type: object
+      properties:
+        status:
+          type: integer
+        message:
+          type: string
+        data:
+          $ref: '#/components/schemas/Language'
+    LanguageListResponse:
+      type: object
+      properties:
+        status:
+          type: integer
+        message:
+          type: string
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Language'
+    UpdateLanguageRequest:
+      type: object
+      properties:
+        key:
+          type: string
+          description: New language key
+        name:
+          type: string
+          description: New language display name
+    CreateLanguageRequest:
+      type: object
+      required:
+      - key
+      properties:
+        key:
+          type: string
+          description: Unique language key (max 20 characters)
+          maxLength: 20
+        name:
+          type: string
+          description: Language display name (max 200 characters)
+          maxLength: 200
+    Language:
+      type: object
+      properties:
+        key:
+          type: string
+          description: Unique language identifier (max 20 chars)
+        name:
+          type: string
+          description: Display name for the language (max 200 chars)
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-SimpleLocalize-Token
+      description: Project API key from Settings > Credentials > API Key
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: Personal Token for Projects API. Generated in account settings.
+externalDocs:
+  description: SimpleLocalize API Documentation
+  url: https://simplelocalize.io/docs/api/get-started/
