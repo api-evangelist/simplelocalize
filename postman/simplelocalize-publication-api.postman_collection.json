@@ -1,0 +1,257 @@
+{
+  "info": {
+    "_postman_id": "684561f8-c99b-45b3-a47e-be50d2a57c1d",
+    "name": "SimpleLocalize Customers Publication API",
+    "description": "The SimpleLocalize API is a REST API for managing translations, languages, projects, and customers. It enables developers to create, read, update, and delete translations programmatically, import and export translation files in 30+ formats, auto-translate using DeepL, Google Translate, or OpenAI, and publish translations to CDN for use in web, mobile, and backend applications.\n\nContact Support:\n Name: SimpleLocalize Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:54:45.000Z",
+    "updatedAt": "2026-07-28T02:54:46.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-684561f8-c99b-45b3-a47e-be50d2a57c1d"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "v1",
+          "item": [
+            {
+              "name": "publish",
+              "item": [
+                {
+                  "name": "Publish Translations",
+                  "id": "4d87fae6-6681-4e00-bc7d-4ffdc56de026",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"environment\": \"latest\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/v1/publish",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "v1",
+                        "publish"
+                      ]
+                    },
+                    "description": "Publishes translations to CDN environments (latest, production, or custom). Rate limited to 10 req/min per project."
+                  },
+                  "response": [
+                    {
+                      "id": "5a914e5b-2205-428c-a721-78601325aef8",
+                      "name": "Publication triggered successfully",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "X-SimpleLocalize-Token",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"environment\": \"latest\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/publish",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "publish"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T02:54:46.000Z",
+                      "updatedAt": "2026-07-28T02:54:46.000Z",
+                      "uid": "35240-5a914e5b-2205-428c-a721-78601325aef8"
+                    },
+                    {
+                      "id": "0b586327-568c-49d1-81d7-2e712880ca57",
+                      "name": "Unauthorized - invalid or missing API key",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "X-SimpleLocalize-Token",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"environment\": \"latest\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/publish",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "publish"
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T02:54:46.000Z",
+                      "updatedAt": "2026-07-28T02:54:46.000Z",
+                      "uid": "35240-0b586327-568c-49d1-81d7-2e712880ca57"
+                    },
+                    {
+                      "id": "088dbe32-1be3-4ae3-b72b-ff562b36f341",
+                      "name": "Rate limit exceeded",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "X-SimpleLocalize-Token",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"environment\": \"latest\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/publish",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "publish"
+                          ]
+                        }
+                      },
+                      "status": "Too Many Requests",
+                      "code": 429,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T02:54:46.000Z",
+                      "updatedAt": "2026-07-28T02:54:46.000Z",
+                      "uid": "35240-088dbe32-1be3-4ae3-b72b-ff562b36f341"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:54:46.000Z",
+                  "updatedAt": "2026-07-28T02:54:46.000Z",
+                  "uid": "35240-4d87fae6-6681-4e00-bc7d-4ffdc56de026"
+                }
+              ],
+              "id": "931ab4ac-d0a0-4b99-baa4-d3b0fb897be4",
+              "createdAt": "2026-07-28T02:54:46.000Z",
+              "updatedAt": "2026-07-28T02:54:46.000Z",
+              "uid": "35240-931ab4ac-d0a0-4b99-baa4-d3b0fb897be4"
+            }
+          ],
+          "id": "57a4cf55-a077-4102-83c2-a6e3667d3535",
+          "createdAt": "2026-07-28T02:54:46.000Z",
+          "updatedAt": "2026-07-28T02:54:46.000Z",
+          "uid": "35240-57a4cf55-a077-4102-83c2-a6e3667d3535"
+        }
+      ],
+      "id": "3fd72095-a061-4132-92b4-a005e3a551ec",
+      "createdAt": "2026-07-28T02:54:46.000Z",
+      "updatedAt": "2026-07-28T02:54:46.000Z",
+      "uid": "35240-3fd72095-a061-4132-92b4-a005e3a551ec"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-SimpleLocalize-Token",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.simplelocalize.io"
+    }
+  ]
+}

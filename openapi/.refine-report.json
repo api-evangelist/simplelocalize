@@ -1,0 +1,26 @@
+{
+  "provider": "simplelocalize",
+  "sources": [
+    "simplelocalize-customers-api-openapi.yml",
+    "simplelocalize-export-api-openapi.yml",
+    "simplelocalize-import-api-openapi.yml",
+    "simplelocalize-languages-api-openapi.yml",
+    "simplelocalize-projects-api-openapi.yml",
+    "simplelocalize-publication-api-openapi.yml",
+    "simplelocalize-translations-api-openapi.yml"
+  ],
+  "outputs": [
+    "simplelocalize-customers-api-openapi.yml",
+    "simplelocalize-export-api-openapi.yml",
+    "simplelocalize-import-api-openapi.yml",
+    "simplelocalize-languages-api-openapi.yml",
+    "simplelocalize-projects-api-openapi.yml",
+    "simplelocalize-publication-api-openapi.yml",
+    "simplelocalize-translations-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

@@ -1,0 +1,672 @@
+{
+  "info": {
+    "_postman_id": "b94e72ec-d8e5-4f35-8e5b-14e53d7721e3",
+    "name": "SimpleLocalize Customers Translations API",
+    "description": "The SimpleLocalize API is a REST API for managing translations, languages, projects, and customers. It enables developers to create, read, update, and delete translations programmatically, import and export translation files in 30+ formats, auto-translate using DeepL, Google Translate, or OpenAI, and publish translations to CDN for use in web, mobile, and backend applications.\n\nContact Support:\n Name: SimpleLocalize Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:54:47.000Z",
+    "updatedAt": "2026-07-28T02:54:47.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-b94e72ec-d8e5-4f35-8e5b-14e53d7721e3"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "v2",
+          "item": [
+            {
+              "name": "translations",
+              "item": [
+                {
+                  "name": "List Translations",
+                  "id": "3d7b1b2a-da6f-4a1c-9058-abece9ec63f0",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/v2/translations?text=<string>&textStatus=NOT_EMPTY&reviewsStatus=NOT_REVIEWED&key=<string>&namespace=<string>&language=<string>&customerId=<string>&page=0&size=100",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "v2",
+                        "translations"
+                      ],
+                      "query": [
+                        {
+                          "description": "Search translated text using case-insensitive partial matching",
+                          "key": "text",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter by translation completeness",
+                          "key": "textStatus",
+                          "value": "NOT_EMPTY"
+                        },
+                        {
+                          "description": "Filter by review status",
+                          "key": "reviewsStatus",
+                          "value": "NOT_REVIEWED"
+                        },
+                        {
+                          "description": "Exact match filter for translation key",
+                          "key": "key",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Exact match filter for translation namespace",
+                          "key": "namespace",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Exact match filter for language identifier",
+                          "key": "language",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter for customer-specific translations",
+                          "key": "customerId",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Pagination page number",
+                          "key": "page",
+                          "value": "0"
+                        },
+                        {
+                          "description": "Results per page (maximum 500)",
+                          "key": "size",
+                          "value": "100"
+                        }
+                      ]
+                    },
+                    "description": "Retrieve translations with filtering and pagination. Supports filtering by key, language, namespace, text content, review status, and customer ID. Returns paginated results with up to 500 items per page."
+                  },
+                  "response": [
+                    {
+                      "id": "b36faacd-9629-4342-bd31-eb7fd7c7be37",
+                      "name": "Translations retrieved successfully",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "X-SimpleLocalize-Token",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v2/translations?text=<string>&textStatus=NOT_EMPTY&reviewsStatus=NOT_REVIEWED&key=<string>&namespace=<string>&language=<string>&customerId=<string>&page=0&size=100",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v2",
+                            "translations"
+                          ],
+                          "query": [
+                            {
+                              "description": "Search translated text using case-insensitive partial matching",
+                              "key": "text",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Filter by translation completeness",
+                              "key": "textStatus",
+                              "value": "NOT_EMPTY"
+                            },
+                            {
+                              "description": "Filter by review status",
+                              "key": "reviewsStatus",
+                              "value": "NOT_REVIEWED"
+                            },
+                            {
+                              "description": "Exact match filter for translation key",
+                              "key": "key",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Exact match filter for translation namespace",
+                              "key": "namespace",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Exact match filter for language identifier",
+                              "key": "language",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Filter for customer-specific translations",
+                              "key": "customerId",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Pagination page number",
+                              "key": "page",
+                              "value": "0"
+                            },
+                            {
+                              "description": "Results per page (maximum 500)",
+                              "key": "size",
+                              "value": "100"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"status\": \"<integer>\",\n  \"message\": \"<string>\",\n  \"data\": [\n    {\n      \"key\": \"<string>\",\n      \"namespace\": \"<string>\",\n      \"language\": \"<string>\",\n      \"text\": \"<string>\",\n      \"reviewStatus\": \"NOT_REVIEWED\",\n      \"customerId\": \"<string>\",\n      \"modifiedAt\": \"<dateTime>\"\n    },\n    {\n      \"key\": \"<string>\",\n      \"namespace\": \"<string>\",\n      \"language\": \"<string>\",\n      \"text\": \"<string>\",\n      \"reviewStatus\": \"REVIEWED\",\n      \"customerId\": \"<string>\",\n      \"modifiedAt\": \"<dateTime>\"\n    }\n  ],\n  \"page\": \"<integer>\",\n  \"totalPages\": \"<integer>\",\n  \"totalElements\": \"<integer>\"\n}",
+                      "createdAt": "2026-07-28T02:54:47.000Z",
+                      "updatedAt": "2026-07-28T02:54:47.000Z",
+                      "uid": "35240-b36faacd-9629-4342-bd31-eb7fd7c7be37"
+                    },
+                    {
+                      "id": "a46168f2-1bc5-49a9-881e-97fbb7fa8095",
+                      "name": "Unauthorized - invalid or missing API key",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "X-SimpleLocalize-Token",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v2/translations?text=<string>&textStatus=NOT_EMPTY&reviewsStatus=NOT_REVIEWED&key=<string>&namespace=<string>&language=<string>&customerId=<string>&page=0&size=100",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v2",
+                            "translations"
+                          ],
+                          "query": [
+                            {
+                              "description": "Search translated text using case-insensitive partial matching",
+                              "key": "text",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Filter by translation completeness",
+                              "key": "textStatus",
+                              "value": "NOT_EMPTY"
+                            },
+                            {
+                              "description": "Filter by review status",
+                              "key": "reviewsStatus",
+                              "value": "NOT_REVIEWED"
+                            },
+                            {
+                              "description": "Exact match filter for translation key",
+                              "key": "key",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Exact match filter for translation namespace",
+                              "key": "namespace",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Exact match filter for language identifier",
+                              "key": "language",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Filter for customer-specific translations",
+                              "key": "customerId",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Pagination page number",
+                              "key": "page",
+                              "value": "0"
+                            },
+                            {
+                              "description": "Results per page (maximum 500)",
+                              "key": "size",
+                              "value": "100"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T02:54:47.000Z",
+                      "updatedAt": "2026-07-28T02:54:47.000Z",
+                      "uid": "35240-a46168f2-1bc5-49a9-881e-97fbb7fa8095"
+                    },
+                    {
+                      "id": "77464d76-b6e0-44f5-86a0-33a0a5f70494",
+                      "name": "Rate limit exceeded",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "X-SimpleLocalize-Token",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v2/translations?text=<string>&textStatus=NOT_EMPTY&reviewsStatus=NOT_REVIEWED&key=<string>&namespace=<string>&language=<string>&customerId=<string>&page=0&size=100",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v2",
+                            "translations"
+                          ],
+                          "query": [
+                            {
+                              "description": "Search translated text using case-insensitive partial matching",
+                              "key": "text",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Filter by translation completeness",
+                              "key": "textStatus",
+                              "value": "NOT_EMPTY"
+                            },
+                            {
+                              "description": "Filter by review status",
+                              "key": "reviewsStatus",
+                              "value": "NOT_REVIEWED"
+                            },
+                            {
+                              "description": "Exact match filter for translation key",
+                              "key": "key",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Exact match filter for translation namespace",
+                              "key": "namespace",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Exact match filter for language identifier",
+                              "key": "language",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Filter for customer-specific translations",
+                              "key": "customerId",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Pagination page number",
+                              "key": "page",
+                              "value": "0"
+                            },
+                            {
+                              "description": "Results per page (maximum 500)",
+                              "key": "size",
+                              "value": "100"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Too Many Requests",
+                      "code": 429,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T02:54:47.000Z",
+                      "updatedAt": "2026-07-28T02:54:47.000Z",
+                      "uid": "35240-77464d76-b6e0-44f5-86a0-33a0a5f70494"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:54:47.000Z",
+                  "updatedAt": "2026-07-28T02:54:47.000Z",
+                  "uid": "35240-3d7b1b2a-da6f-4a1c-9058-abece9ec63f0"
+                }
+              ],
+              "id": "ac560c1c-be44-44db-95d2-3cee48448fb7",
+              "createdAt": "2026-07-28T02:54:47.000Z",
+              "updatedAt": "2026-07-28T02:54:47.000Z",
+              "uid": "35240-ac560c1c-be44-44db-95d2-3cee48448fb7"
+            }
+          ],
+          "id": "cf87ca44-128f-432b-bc8f-4578ec4b54bd",
+          "createdAt": "2026-07-28T02:54:47.000Z",
+          "updatedAt": "2026-07-28T02:54:47.000Z",
+          "uid": "35240-cf87ca44-128f-432b-bc8f-4578ec4b54bd"
+        },
+        {
+          "name": "v1",
+          "item": [
+            {
+              "name": "translations",
+              "item": [
+                {
+                  "name": "Create or Update Translation",
+                  "id": "4471929e-1d51-4009-b544-ff2b201f8e41",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"key\": \"<string>\",\n  \"language\": \"<string>\",\n  \"namespace\": \"<string>\",\n  \"text\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/v1/translations",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "v1",
+                        "translations"
+                      ]
+                    },
+                    "description": "Creates a new translation or updates an existing one. Supports upsert semantics - if the translation key already exists for the given language and namespace, it will be updated."
+                  },
+                  "response": [
+                    {
+                      "id": "2ac7b82c-9fe9-452a-949a-4f6d88172631",
+                      "name": "Translation created or updated successfully",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "X-SimpleLocalize-Token",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"key\": \"<string>\",\n  \"language\": \"<string>\",\n  \"namespace\": \"<string>\",\n  \"text\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/translations",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "translations"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"status\": \"<integer>\",\n  \"message\": \"<string>\",\n  \"data\": {\n    \"key\": \"<string>\",\n    \"namespace\": \"<string>\",\n    \"language\": \"<string>\",\n    \"text\": \"<string>\",\n    \"reviewStatus\": \"REVIEWED\",\n    \"customerId\": \"<string>\",\n    \"modifiedAt\": \"<dateTime>\"\n  }\n}",
+                      "createdAt": "2026-07-28T02:54:47.000Z",
+                      "updatedAt": "2026-07-28T02:54:47.000Z",
+                      "uid": "35240-2ac7b82c-9fe9-452a-949a-4f6d88172631"
+                    },
+                    {
+                      "id": "13f45d27-459d-4ef3-b50d-3b4a61ffee1e",
+                      "name": "Invalid request body",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "X-SimpleLocalize-Token",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"key\": \"<string>\",\n  \"language\": \"<string>\",\n  \"namespace\": \"<string>\",\n  \"text\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/translations",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "translations"
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T02:54:47.000Z",
+                      "updatedAt": "2026-07-28T02:54:47.000Z",
+                      "uid": "35240-13f45d27-459d-4ef3-b50d-3b4a61ffee1e"
+                    },
+                    {
+                      "id": "871fee50-6514-4925-b8d8-0a8f3304240d",
+                      "name": "Unauthorized - invalid or missing API key",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "X-SimpleLocalize-Token",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"key\": \"<string>\",\n  \"language\": \"<string>\",\n  \"namespace\": \"<string>\",\n  \"text\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/translations",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "translations"
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T02:54:47.000Z",
+                      "updatedAt": "2026-07-28T02:54:47.000Z",
+                      "uid": "35240-871fee50-6514-4925-b8d8-0a8f3304240d"
+                    },
+                    {
+                      "id": "5694c5ee-fe8e-4d1a-a17c-35db364fd4a6",
+                      "name": "Rate limit exceeded",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "X-SimpleLocalize-Token",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"key\": \"<string>\",\n  \"language\": \"<string>\",\n  \"namespace\": \"<string>\",\n  \"text\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/translations",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "translations"
+                          ]
+                        }
+                      },
+                      "status": "Too Many Requests",
+                      "code": 429,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T02:54:47.000Z",
+                      "updatedAt": "2026-07-28T02:54:47.000Z",
+                      "uid": "35240-5694c5ee-fe8e-4d1a-a17c-35db364fd4a6"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:54:47.000Z",
+                  "updatedAt": "2026-07-28T02:54:47.000Z",
+                  "uid": "35240-4471929e-1d51-4009-b544-ff2b201f8e41"
+                }
+              ],
+              "id": "154643fd-a392-4b05-8d0d-f5061d834b49",
+              "createdAt": "2026-07-28T02:54:47.000Z",
+              "updatedAt": "2026-07-28T02:54:47.000Z",
+              "uid": "35240-154643fd-a392-4b05-8d0d-f5061d834b49"
+            }
+          ],
+          "id": "70a975e1-09fe-4fd4-a430-dd9e05459e94",
+          "createdAt": "2026-07-28T02:54:47.000Z",
+          "updatedAt": "2026-07-28T02:54:47.000Z",
+          "uid": "35240-70a975e1-09fe-4fd4-a430-dd9e05459e94"
+        }
+      ],
+      "id": "430a0028-b49b-4762-bf20-9b1967ff90f9",
+      "createdAt": "2026-07-28T02:54:47.000Z",
+      "updatedAt": "2026-07-28T02:54:47.000Z",
+      "uid": "35240-430a0028-b49b-4762-bf20-9b1967ff90f9"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-SimpleLocalize-Token",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.simplelocalize.io"
+    }
+  ]
+}

@@ -1,0 +1,282 @@
+{
+  "info": {
+    "_postman_id": "3e27488c-d663-4c3f-91af-518af50ce3fd",
+    "name": "SimpleLocalize Customers Export API",
+    "description": "The SimpleLocalize API is a REST API for managing translations, languages, projects, and customers. It enables developers to create, read, update, and delete translations programmatically, import and export translation files in 30+ formats, auto-translate using DeepL, Google Translate, or OpenAI, and publish translations to CDN for use in web, mobile, and backend applications.\n\nContact Support:\n Name: SimpleLocalize Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:54:41.000Z",
+    "updatedAt": "2026-07-28T02:54:42.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-3e27488c-d663-4c3f-91af-518af50ce3fd"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "v1",
+          "item": [
+            {
+              "name": "export",
+              "item": [
+                {
+                  "name": "Export Translations",
+                  "id": "b3a2447a-7fd0-4198-8e09-4e092e17590a",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/octet-stream"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/v1/export?downloadFormat=<string>&languageKey=<string>&namespace=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "v1",
+                        "export"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Target file format for export",
+                          "key": "downloadFormat",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Export only the specified language",
+                          "key": "languageKey",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Export only the specified namespace",
+                          "key": "namespace",
+                          "value": "<string>"
+                        }
+                      ]
+                    },
+                    "description": "Exports translation files in the requested format. Supports all 30+ format types and optional filtering by language, namespace, or customer. Rate limited to 60 req/min per project."
+                  },
+                  "response": [
+                    {
+                      "id": "aa14c559-e86d-491b-bc18-554e0a5d1cab",
+                      "name": "Export file returned",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/octet-stream"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "X-SimpleLocalize-Token",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/export?downloadFormat=<string>&languageKey=<string>&namespace=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "export"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Target file format for export",
+                              "key": "downloadFormat",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Export only the specified language",
+                              "key": "languageKey",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Export only the specified namespace",
+                              "key": "namespace",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "text",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/octet-stream"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "<binary>",
+                      "createdAt": "2026-07-28T02:54:42.000Z",
+                      "updatedAt": "2026-07-28T02:54:42.000Z",
+                      "uid": "35240-aa14c559-e86d-491b-bc18-554e0a5d1cab"
+                    },
+                    {
+                      "id": "f94f1c69-0d9c-4dd9-a407-607b26beab4b",
+                      "name": "Unauthorized - invalid or missing API key",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "X-SimpleLocalize-Token",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/export?downloadFormat=<string>&languageKey=<string>&namespace=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "export"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Target file format for export",
+                              "key": "downloadFormat",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Export only the specified language",
+                              "key": "languageKey",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Export only the specified namespace",
+                              "key": "namespace",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T02:54:42.000Z",
+                      "updatedAt": "2026-07-28T02:54:42.000Z",
+                      "uid": "35240-f94f1c69-0d9c-4dd9-a407-607b26beab4b"
+                    },
+                    {
+                      "id": "6ca631f3-abe5-4f1e-83ca-059d3842db7c",
+                      "name": "Rate limit exceeded",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "X-SimpleLocalize-Token",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/export?downloadFormat=<string>&languageKey=<string>&namespace=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "export"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Target file format for export",
+                              "key": "downloadFormat",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Export only the specified language",
+                              "key": "languageKey",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Export only the specified namespace",
+                              "key": "namespace",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Too Many Requests",
+                      "code": 429,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T02:54:42.000Z",
+                      "updatedAt": "2026-07-28T02:54:42.000Z",
+                      "uid": "35240-6ca631f3-abe5-4f1e-83ca-059d3842db7c"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:54:42.000Z",
+                  "updatedAt": "2026-07-28T02:54:42.000Z",
+                  "uid": "35240-b3a2447a-7fd0-4198-8e09-4e092e17590a"
+                }
+              ],
+              "id": "87aebfb1-755a-40d0-8580-5ad922d97748",
+              "createdAt": "2026-07-28T02:54:42.000Z",
+              "updatedAt": "2026-07-28T02:54:42.000Z",
+              "uid": "35240-87aebfb1-755a-40d0-8580-5ad922d97748"
+            }
+          ],
+          "id": "108675be-07e8-4271-8c5a-ed974f5bbfe4",
+          "createdAt": "2026-07-28T02:54:42.000Z",
+          "updatedAt": "2026-07-28T02:54:42.000Z",
+          "uid": "35240-108675be-07e8-4271-8c5a-ed974f5bbfe4"
+        }
+      ],
+      "id": "dcc20286-5ab9-4767-80ec-d314c61c0f24",
+      "createdAt": "2026-07-28T02:54:42.000Z",
+      "updatedAt": "2026-07-28T02:54:42.000Z",
+      "uid": "35240-dcc20286-5ab9-4767-80ec-d314c61c0f24"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-SimpleLocalize-Token",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.simplelocalize.io"
+    }
+  ]
+}

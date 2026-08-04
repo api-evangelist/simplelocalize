@@ -1,0 +1,397 @@
+{
+  "info": {
+    "_postman_id": "b8872671-333f-4876-8b88-d1e0bc34d9e9",
+    "name": "SimpleLocalize Customers Import API",
+    "description": "The SimpleLocalize API is a REST API for managing translations, languages, projects, and customers. It enables developers to create, read, update, and delete translations programmatically, import and export translation files in 30+ formats, auto-translate using DeepL, Google Translate, or OpenAI, and publish translations to CDN for use in web, mobile, and backend applications.\n\nContact Support:\n Name: SimpleLocalize Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:54:42.000Z",
+    "updatedAt": "2026-07-28T02:54:43.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-b8872671-333f-4876-8b88-d1e0bc34d9e9"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "v1",
+          "item": [
+            {
+              "name": "import",
+              "item": [
+                {
+                  "name": "Import Translations",
+                  "id": "8dec5dcb-a105-4d27-802c-e686c6aa54d5",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "multipart/form-data"
+                      }
+                    ],
+                    "body": {
+                      "mode": "formdata",
+                      "formdata": [
+                        {
+                          "description": "Translation file to import",
+                          "key": "file",
+                          "type": "file",
+                          "value": null
+                        },
+                        {
+                          "description": "File format identifier (e.g., single-language-json, multi-language-json)",
+                          "key": "uploadFormat",
+                          "value": "<string>",
+                          "type": "text"
+                        },
+                        {
+                          "description": "Target language key (for single-language formats)",
+                          "key": "languageKey",
+                          "value": "<string>",
+                          "type": "text"
+                        },
+                        {
+                          "description": "Target namespace for imported translations",
+                          "key": "namespace",
+                          "value": "<string>",
+                          "type": "text"
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/v1/import",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "v1",
+                        "import"
+                      ]
+                    },
+                    "description": "Imports translation files in 30+ supported formats including JSON, YAML, XLIFF, Android XML, iOS Strings, Java Properties, PHP, PO/POT, CSV, Excel, and more. Rate limited to 60 req/min per project."
+                  },
+                  "response": [
+                    {
+                      "id": "61fefa90-b9e5-4134-9b2a-93512404654f",
+                      "name": "Import completed successfully",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "multipart/form-data"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "X-SimpleLocalize-Token",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "formdata",
+                          "formdata": [
+                            {
+                              "description": "Translation file to import",
+                              "key": "file",
+                              "type": "file"
+                            },
+                            {
+                              "description": "File format identifier (e.g., single-language-json, multi-language-json)",
+                              "key": "uploadFormat",
+                              "value": "<string>",
+                              "type": "text"
+                            },
+                            {
+                              "description": "Target language key (for single-language formats)",
+                              "key": "languageKey",
+                              "value": "<string>",
+                              "type": "text"
+                            },
+                            {
+                              "description": "Target namespace for imported translations",
+                              "key": "namespace",
+                              "value": "<string>",
+                              "type": "text"
+                            }
+                          ]
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/import",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "import"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T02:54:43.000Z",
+                      "updatedAt": "2026-07-28T02:54:43.000Z",
+                      "uid": "35240-61fefa90-b9e5-4134-9b2a-93512404654f"
+                    },
+                    {
+                      "id": "df9f3e61-45e1-4e15-8517-25af1da2b488",
+                      "name": "Invalid file or format",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "multipart/form-data"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "X-SimpleLocalize-Token",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "formdata",
+                          "formdata": [
+                            {
+                              "description": "Translation file to import",
+                              "key": "file",
+                              "type": "file"
+                            },
+                            {
+                              "description": "File format identifier (e.g., single-language-json, multi-language-json)",
+                              "key": "uploadFormat",
+                              "value": "<string>",
+                              "type": "text"
+                            },
+                            {
+                              "description": "Target language key (for single-language formats)",
+                              "key": "languageKey",
+                              "value": "<string>",
+                              "type": "text"
+                            },
+                            {
+                              "description": "Target namespace for imported translations",
+                              "key": "namespace",
+                              "value": "<string>",
+                              "type": "text"
+                            }
+                          ]
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/import",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "import"
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T02:54:43.000Z",
+                      "updatedAt": "2026-07-28T02:54:43.000Z",
+                      "uid": "35240-df9f3e61-45e1-4e15-8517-25af1da2b488"
+                    },
+                    {
+                      "id": "48fb35aa-446e-4e0a-89d0-ca5d9b6a075d",
+                      "name": "Unauthorized - invalid or missing API key",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "multipart/form-data"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "X-SimpleLocalize-Token",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "formdata",
+                          "formdata": [
+                            {
+                              "description": "Translation file to import",
+                              "key": "file",
+                              "type": "file"
+                            },
+                            {
+                              "description": "File format identifier (e.g., single-language-json, multi-language-json)",
+                              "key": "uploadFormat",
+                              "value": "<string>",
+                              "type": "text"
+                            },
+                            {
+                              "description": "Target language key (for single-language formats)",
+                              "key": "languageKey",
+                              "value": "<string>",
+                              "type": "text"
+                            },
+                            {
+                              "description": "Target namespace for imported translations",
+                              "key": "namespace",
+                              "value": "<string>",
+                              "type": "text"
+                            }
+                          ]
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/import",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "import"
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T02:54:43.000Z",
+                      "updatedAt": "2026-07-28T02:54:43.000Z",
+                      "uid": "35240-48fb35aa-446e-4e0a-89d0-ca5d9b6a075d"
+                    },
+                    {
+                      "id": "852f0950-0f4c-4f96-8cc3-23cc33ce4f54",
+                      "name": "Rate limit exceeded",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "multipart/form-data"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "X-SimpleLocalize-Token",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "formdata",
+                          "formdata": [
+                            {
+                              "description": "Translation file to import",
+                              "key": "file",
+                              "type": "file"
+                            },
+                            {
+                              "description": "File format identifier (e.g., single-language-json, multi-language-json)",
+                              "key": "uploadFormat",
+                              "value": "<string>",
+                              "type": "text"
+                            },
+                            {
+                              "description": "Target language key (for single-language formats)",
+                              "key": "languageKey",
+                              "value": "<string>",
+                              "type": "text"
+                            },
+                            {
+                              "description": "Target namespace for imported translations",
+                              "key": "namespace",
+                              "value": "<string>",
+                              "type": "text"
+                            }
+                          ]
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/import",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "import"
+                          ]
+                        }
+                      },
+                      "status": "Too Many Requests",
+                      "code": 429,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T02:54:43.000Z",
+                      "updatedAt": "2026-07-28T02:54:43.000Z",
+                      "uid": "35240-852f0950-0f4c-4f96-8cc3-23cc33ce4f54"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:54:43.000Z",
+                  "updatedAt": "2026-07-28T02:54:43.000Z",
+                  "uid": "35240-8dec5dcb-a105-4d27-802c-e686c6aa54d5"
+                }
+              ],
+              "id": "0cca6a30-8784-4414-8eb1-17300f8c2f47",
+              "createdAt": "2026-07-28T02:54:43.000Z",
+              "updatedAt": "2026-07-28T02:54:43.000Z",
+              "uid": "35240-0cca6a30-8784-4414-8eb1-17300f8c2f47"
+            }
+          ],
+          "id": "f2499405-8989-44f0-8842-2e4c7c71708e",
+          "createdAt": "2026-07-28T02:54:43.000Z",
+          "updatedAt": "2026-07-28T02:54:43.000Z",
+          "uid": "35240-f2499405-8989-44f0-8842-2e4c7c71708e"
+        }
+      ],
+      "id": "548328b2-226d-4ece-a3d7-e6d1890635ae",
+      "createdAt": "2026-07-28T02:54:43.000Z",
+      "updatedAt": "2026-07-28T02:54:43.000Z",
+      "uid": "35240-548328b2-226d-4ece-a3d7-e6d1890635ae"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-SimpleLocalize-Token",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.simplelocalize.io"
+    }
+  ]
+}

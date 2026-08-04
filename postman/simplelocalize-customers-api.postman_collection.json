@@ -1,0 +1,942 @@
+{
+  "info": {
+    "_postman_id": "80d057bf-59b8-4a7c-bf49-e0feaae7f295",
+    "name": "SimpleLocalize Customers API",
+    "description": "The SimpleLocalize API is a REST API for managing translations, languages, projects, and customers. It enables developers to create, read, update, and delete translations programmatically, import and export translation files in 30+ formats, auto-translate using DeepL, Google Translate, or OpenAI, and publish translations to CDN for use in web, mobile, and backend applications.\n\nContact Support:\n Name: SimpleLocalize Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:54:40.000Z",
+    "updatedAt": "2026-07-28T02:54:41.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-80d057bf-59b8-4a7c-bf49-e0feaae7f295"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "v1",
+          "item": [
+            {
+              "name": "customers",
+              "item": [
+                {
+                  "name": "{customerKey}",
+                  "item": [
+                    {
+                      "name": "Get Customer",
+                      "id": "623f5237-2ddc-478d-a14b-b1f05dbf2974",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/customers/:customerKey",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "customers",
+                            ":customerKey"
+                          ],
+                          "variable": [
+                            {
+                              "id": "b27fb518-f8a6-492b-9872-402ce4c03047",
+                              "key": "customerKey",
+                              "value": "<string>",
+                              "description": "(Required) The unique customer identifier"
+                            }
+                          ]
+                        },
+                        "description": "Retrieves details for a specific customer by their key."
+                      },
+                      "response": [
+                        {
+                          "id": "4c634b61-72d5-45af-8804-1854fc241c5d",
+                          "name": "Customer retrieved successfully",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "X-SimpleLocalize-Token",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/customers/:customerKey",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "customers",
+                                ":customerKey"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "customerKey"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"status\": \"<integer>\",\n  \"message\": \"<string>\",\n  \"data\": {\n    \"key\": \"<string>\",\n    \"description\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-07-28T02:54:41.000Z",
+                          "updatedAt": "2026-07-28T02:54:41.000Z",
+                          "uid": "35240-4c634b61-72d5-45af-8804-1854fc241c5d"
+                        },
+                        {
+                          "id": "49c6ccf3-faf7-4d5d-87e5-6fb6ecf0c6e1",
+                          "name": "Unauthorized - invalid or missing API key",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "X-SimpleLocalize-Token",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/customers/:customerKey",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "customers",
+                                ":customerKey"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "customerKey"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T02:54:41.000Z",
+                          "updatedAt": "2026-07-28T02:54:41.000Z",
+                          "uid": "35240-49c6ccf3-faf7-4d5d-87e5-6fb6ecf0c6e1"
+                        },
+                        {
+                          "id": "ca3e5200-d720-4dee-aac0-55eaa5c9c25c",
+                          "name": "Customer not found",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "X-SimpleLocalize-Token",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/customers/:customerKey",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "customers",
+                                ":customerKey"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "customerKey"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T02:54:41.000Z",
+                          "updatedAt": "2026-07-28T02:54:41.000Z",
+                          "uid": "35240-ca3e5200-d720-4dee-aac0-55eaa5c9c25c"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:54:41.000Z",
+                      "updatedAt": "2026-07-28T02:54:41.000Z",
+                      "uid": "35240-623f5237-2ddc-478d-a14b-b1f05dbf2974"
+                    },
+                    {
+                      "name": "Update Customer",
+                      "id": "fe81d04b-c508-4f99-ab2b-3338a38d9423",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"key\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/customers/:customerKey",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "customers",
+                            ":customerKey"
+                          ],
+                          "variable": [
+                            {
+                              "id": "62562265-59e2-494a-b189-26abdc566538",
+                              "key": "customerKey",
+                              "value": "<string>",
+                              "description": "(Required) The unique customer identifier"
+                            }
+                          ]
+                        },
+                        "description": "Modifies an existing customer's key or description."
+                      },
+                      "response": [
+                        {
+                          "id": "10b4d1ff-4e4f-44f9-aeca-570fbb74f0a0",
+                          "name": "Customer updated successfully",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "X-SimpleLocalize-Token",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"key\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/customers/:customerKey",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "customers",
+                                ":customerKey"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "customerKey"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T02:54:41.000Z",
+                          "updatedAt": "2026-07-28T02:54:41.000Z",
+                          "uid": "35240-10b4d1ff-4e4f-44f9-aeca-570fbb74f0a0"
+                        },
+                        {
+                          "id": "61fd1c4a-2d67-498e-be40-e26f520d657e",
+                          "name": "Unauthorized - invalid or missing API key",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "X-SimpleLocalize-Token",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"key\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/customers/:customerKey",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "customers",
+                                ":customerKey"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "customerKey"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T02:54:41.000Z",
+                          "updatedAt": "2026-07-28T02:54:41.000Z",
+                          "uid": "35240-61fd1c4a-2d67-498e-be40-e26f520d657e"
+                        },
+                        {
+                          "id": "da5d57dd-e6e6-4844-ad53-bfa176002d43",
+                          "name": "Customer not found",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "X-SimpleLocalize-Token",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"key\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/customers/:customerKey",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "customers",
+                                ":customerKey"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "customerKey"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T02:54:41.000Z",
+                          "updatedAt": "2026-07-28T02:54:41.000Z",
+                          "uid": "35240-da5d57dd-e6e6-4844-ad53-bfa176002d43"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:54:41.000Z",
+                      "updatedAt": "2026-07-28T02:54:41.000Z",
+                      "uid": "35240-fe81d04b-c508-4f99-ab2b-3338a38d9423"
+                    },
+                    {
+                      "name": "Delete Customer",
+                      "id": "7c7ba328-a146-4ddd-bd97-a506cbf2e606",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/customers/:customerKey",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "customers",
+                            ":customerKey"
+                          ],
+                          "variable": [
+                            {
+                              "id": "a6a9f3d2-8d10-4b74-9636-09cb74de8c7d",
+                              "key": "customerKey",
+                              "value": "<string>",
+                              "description": "(Required) The unique customer identifier"
+                            }
+                          ]
+                        },
+                        "description": "Removes a customer record from the project."
+                      },
+                      "response": [
+                        {
+                          "id": "b065d1c8-edce-4fb7-922a-7f15ec7397df",
+                          "name": "Customer deleted successfully",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "X-SimpleLocalize-Token",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/customers/:customerKey",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "customers",
+                                ":customerKey"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "customerKey"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T02:54:41.000Z",
+                          "updatedAt": "2026-07-28T02:54:41.000Z",
+                          "uid": "35240-b065d1c8-edce-4fb7-922a-7f15ec7397df"
+                        },
+                        {
+                          "id": "6acc3426-36a2-4ba0-b476-45384cb85c48",
+                          "name": "Unauthorized - invalid or missing API key",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "X-SimpleLocalize-Token",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/customers/:customerKey",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "customers",
+                                ":customerKey"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "customerKey"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T02:54:41.000Z",
+                          "updatedAt": "2026-07-28T02:54:41.000Z",
+                          "uid": "35240-6acc3426-36a2-4ba0-b476-45384cb85c48"
+                        },
+                        {
+                          "id": "11ca0852-fec7-4fb5-9080-d818a4841fed",
+                          "name": "Customer not found",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "X-SimpleLocalize-Token",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/customers/:customerKey",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "customers",
+                                ":customerKey"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "customerKey"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T02:54:41.000Z",
+                          "updatedAt": "2026-07-28T02:54:41.000Z",
+                          "uid": "35240-11ca0852-fec7-4fb5-9080-d818a4841fed"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:54:41.000Z",
+                      "updatedAt": "2026-07-28T02:54:41.000Z",
+                      "uid": "35240-7c7ba328-a146-4ddd-bd97-a506cbf2e606"
+                    }
+                  ],
+                  "id": "46d803ce-f831-4250-b663-951e3760256a",
+                  "createdAt": "2026-07-28T02:54:41.000Z",
+                  "updatedAt": "2026-07-28T02:54:41.000Z",
+                  "uid": "35240-46d803ce-f831-4250-b663-951e3760256a"
+                },
+                {
+                  "name": "List Customers",
+                  "id": "9b60fa5b-7160-432b-9094-af67f12360f4",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/v1/customers",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "v1",
+                        "customers"
+                      ]
+                    },
+                    "description": "Returns all available customers in the project."
+                  },
+                  "response": [
+                    {
+                      "id": "2c7eae8e-fbeb-49d3-a29d-9ada48c91372",
+                      "name": "Customers retrieved successfully",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "X-SimpleLocalize-Token",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/customers",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "customers"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"status\": \"<integer>\",\n  \"message\": \"<string>\",\n  \"data\": [\n    {\n      \"key\": \"<string>\",\n      \"description\": \"<string>\"\n    },\n    {\n      \"key\": \"<string>\",\n      \"description\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T02:54:41.000Z",
+                      "updatedAt": "2026-07-28T02:54:41.000Z",
+                      "uid": "35240-2c7eae8e-fbeb-49d3-a29d-9ada48c91372"
+                    },
+                    {
+                      "id": "773122a5-f561-49f0-a6f3-23efd440255e",
+                      "name": "Unauthorized - invalid or missing API key",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "X-SimpleLocalize-Token",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/customers",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "customers"
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T02:54:41.000Z",
+                      "updatedAt": "2026-07-28T02:54:41.000Z",
+                      "uid": "35240-773122a5-f561-49f0-a6f3-23efd440255e"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:54:41.000Z",
+                  "updatedAt": "2026-07-28T02:54:41.000Z",
+                  "uid": "35240-9b60fa5b-7160-432b-9094-af67f12360f4"
+                },
+                {
+                  "name": "Create Customer",
+                  "id": "471cda4b-5cce-49e0-ba20-357acdaab7e7",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"key\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/v1/customers",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "v1",
+                        "customers"
+                      ]
+                    },
+                    "description": "Establishes a new customer record for project-specific translations. Customer key must be unique and up to 40 characters."
+                  },
+                  "response": [
+                    {
+                      "id": "9a49c988-0294-4996-bdbc-d286e1d010b0",
+                      "name": "Customer created successfully",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "X-SimpleLocalize-Token",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"key\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/customers",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "customers"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"status\": \"<integer>\",\n  \"message\": \"<string>\",\n  \"data\": {\n    \"key\": \"<string>\",\n    \"description\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-07-28T02:54:41.000Z",
+                      "updatedAt": "2026-07-28T02:54:41.000Z",
+                      "uid": "35240-9a49c988-0294-4996-bdbc-d286e1d010b0"
+                    },
+                    {
+                      "id": "58f659f3-dc99-45f2-880a-bedaa7c4a2a9",
+                      "name": "Invalid request or duplicate customer key",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "X-SimpleLocalize-Token",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"key\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/customers",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "customers"
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T02:54:41.000Z",
+                      "updatedAt": "2026-07-28T02:54:41.000Z",
+                      "uid": "35240-58f659f3-dc99-45f2-880a-bedaa7c4a2a9"
+                    },
+                    {
+                      "id": "a774c8df-9129-4309-8f2a-09d3a46d8c41",
+                      "name": "Unauthorized - invalid or missing API key",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "X-SimpleLocalize-Token",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"key\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/customers",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "customers"
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T02:54:41.000Z",
+                      "updatedAt": "2026-07-28T02:54:41.000Z",
+                      "uid": "35240-a774c8df-9129-4309-8f2a-09d3a46d8c41"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:54:41.000Z",
+                  "updatedAt": "2026-07-28T02:54:41.000Z",
+                  "uid": "35240-471cda4b-5cce-49e0-ba20-357acdaab7e7"
+                }
+              ],
+              "id": "e19b30e9-328d-4f7a-b60a-adb382771d89",
+              "createdAt": "2026-07-28T02:54:41.000Z",
+              "updatedAt": "2026-07-28T02:54:41.000Z",
+              "uid": "35240-e19b30e9-328d-4f7a-b60a-adb382771d89"
+            }
+          ],
+          "id": "a42f39de-3ab3-487f-aa64-beea56ba82a7",
+          "createdAt": "2026-07-28T02:54:41.000Z",
+          "updatedAt": "2026-07-28T02:54:41.000Z",
+          "uid": "35240-a42f39de-3ab3-487f-aa64-beea56ba82a7"
+        }
+      ],
+      "id": "cb3c6b39-6e17-42d0-ae99-b855afe85cae",
+      "createdAt": "2026-07-28T02:54:41.000Z",
+      "updatedAt": "2026-07-28T02:54:41.000Z",
+      "uid": "35240-cb3c6b39-6e17-42d0-ae99-b855afe85cae"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-SimpleLocalize-Token",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.simplelocalize.io"
+    }
+  ]
+}

@@ -1,0 +1,768 @@
+{
+  "info": {
+    "_postman_id": "1e9ebb18-1aea-481d-a1c5-06288116c230",
+    "name": "SimpleLocalize Customers Languages API",
+    "description": "The SimpleLocalize API is a REST API for managing translations, languages, projects, and customers. It enables developers to create, read, update, and delete translations programmatically, import and export translation files in 30+ formats, auto-translate using DeepL, Google Translate, or OpenAI, and publish translations to CDN for use in web, mobile, and backend applications.\n\nContact Support:\n Name: SimpleLocalize Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:54:43.000Z",
+    "updatedAt": "2026-07-28T02:54:43.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-1e9ebb18-1aea-481d-a1c5-06288116c230"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "v1",
+          "item": [
+            {
+              "name": "languages",
+              "item": [
+                {
+                  "name": "{languageKey}",
+                  "item": [
+                    {
+                      "name": "Update Language",
+                      "id": "41073397-518e-4e1e-817b-5a31c3beff43",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"key\": \"<string>\",\n  \"name\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/languages/:languageKey",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "languages",
+                            ":languageKey"
+                          ],
+                          "variable": [
+                            {
+                              "id": "65582f68-21bb-45a3-a0ee-92ea04584bac",
+                              "key": "languageKey",
+                              "value": "<string>",
+                              "description": "(Required) The language identifier to update"
+                            }
+                          ]
+                        },
+                        "description": "Modifies an existing language's key or display name."
+                      },
+                      "response": [
+                        {
+                          "id": "254939c4-553e-4830-869a-7c32f33c894c",
+                          "name": "Language updated successfully",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "X-SimpleLocalize-Token",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"key\": \"<string>\",\n  \"name\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/languages/:languageKey",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "languages",
+                                ":languageKey"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "languageKey"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T02:54:44.000Z",
+                          "updatedAt": "2026-07-28T02:54:44.000Z",
+                          "uid": "35240-254939c4-553e-4830-869a-7c32f33c894c"
+                        },
+                        {
+                          "id": "f89a31c4-e9a9-4bf9-af3d-0d1aa9850247",
+                          "name": "Unauthorized - invalid or missing API key",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "X-SimpleLocalize-Token",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"key\": \"<string>\",\n  \"name\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/languages/:languageKey",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "languages",
+                                ":languageKey"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "languageKey"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T02:54:44.000Z",
+                          "updatedAt": "2026-07-28T02:54:44.000Z",
+                          "uid": "35240-f89a31c4-e9a9-4bf9-af3d-0d1aa9850247"
+                        },
+                        {
+                          "id": "653f442b-74a0-4913-b783-010fdaf23c40",
+                          "name": "Language not found",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "X-SimpleLocalize-Token",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"key\": \"<string>\",\n  \"name\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/languages/:languageKey",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "languages",
+                                ":languageKey"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "languageKey"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T02:54:44.000Z",
+                          "updatedAt": "2026-07-28T02:54:44.000Z",
+                          "uid": "35240-653f442b-74a0-4913-b783-010fdaf23c40"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:54:44.000Z",
+                      "updatedAt": "2026-07-28T02:54:44.000Z",
+                      "uid": "35240-41073397-518e-4e1e-817b-5a31c3beff43"
+                    },
+                    {
+                      "name": "Delete Language",
+                      "id": "315c7736-a613-4c70-943f-802607aebf55",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/languages/:languageKey",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "languages",
+                            ":languageKey"
+                          ],
+                          "variable": [
+                            {
+                              "id": "08f4a0b2-b769-4cbe-bc7d-5241142ab043",
+                              "key": "languageKey",
+                              "value": "<string>",
+                              "description": "(Required) The language identifier to delete"
+                            }
+                          ]
+                        },
+                        "description": "Removes a language from the project. This also removes all translations for the given language."
+                      },
+                      "response": [
+                        {
+                          "id": "0139843f-afd0-43d5-a3ca-f5f4f681a263",
+                          "name": "Language deleted successfully",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "X-SimpleLocalize-Token",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/languages/:languageKey",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "languages",
+                                ":languageKey"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "languageKey"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T02:54:44.000Z",
+                          "updatedAt": "2026-07-28T02:54:44.000Z",
+                          "uid": "35240-0139843f-afd0-43d5-a3ca-f5f4f681a263"
+                        },
+                        {
+                          "id": "48a8b8a6-dd4f-47f4-a216-71dd2911b9df",
+                          "name": "Unauthorized - invalid or missing API key",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "X-SimpleLocalize-Token",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/languages/:languageKey",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "languages",
+                                ":languageKey"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "languageKey"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T02:54:44.000Z",
+                          "updatedAt": "2026-07-28T02:54:44.000Z",
+                          "uid": "35240-48a8b8a6-dd4f-47f4-a216-71dd2911b9df"
+                        },
+                        {
+                          "id": "140d5547-0823-4639-b034-afcfd496e1cb",
+                          "name": "Language not found",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "X-SimpleLocalize-Token",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/languages/:languageKey",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "languages",
+                                ":languageKey"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "languageKey"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T02:54:44.000Z",
+                          "updatedAt": "2026-07-28T02:54:44.000Z",
+                          "uid": "35240-140d5547-0823-4639-b034-afcfd496e1cb"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:54:44.000Z",
+                      "updatedAt": "2026-07-28T02:54:44.000Z",
+                      "uid": "35240-315c7736-a613-4c70-943f-802607aebf55"
+                    }
+                  ],
+                  "id": "12c66ca5-243d-4f27-ba14-9b2c608d9dd8",
+                  "createdAt": "2026-07-28T02:54:44.000Z",
+                  "updatedAt": "2026-07-28T02:54:44.000Z",
+                  "uid": "35240-12c66ca5-243d-4f27-ba14-9b2c608d9dd8"
+                },
+                {
+                  "name": "List Languages",
+                  "id": "b6ca6344-144d-4d43-aaf7-ead34bf706c1",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/v1/languages",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "v1",
+                        "languages"
+                      ]
+                    },
+                    "description": "Retrieves all languages configured in the project."
+                  },
+                  "response": [
+                    {
+                      "id": "b899d246-a142-4d67-91b1-80c2a85ba61a",
+                      "name": "Languages retrieved successfully",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "X-SimpleLocalize-Token",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/languages",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "languages"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"status\": \"<integer>\",\n  \"message\": \"<string>\",\n  \"data\": [\n    {\n      \"key\": \"<string>\",\n      \"name\": \"<string>\"\n    },\n    {\n      \"key\": \"<string>\",\n      \"name\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T02:54:44.000Z",
+                      "updatedAt": "2026-07-28T02:54:44.000Z",
+                      "uid": "35240-b899d246-a142-4d67-91b1-80c2a85ba61a"
+                    },
+                    {
+                      "id": "5c56a6ee-f9dc-4022-8d9b-6bb4dc638ce8",
+                      "name": "Unauthorized - invalid or missing API key",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "X-SimpleLocalize-Token",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/languages",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "languages"
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T02:54:44.000Z",
+                      "updatedAt": "2026-07-28T02:54:44.000Z",
+                      "uid": "35240-5c56a6ee-f9dc-4022-8d9b-6bb4dc638ce8"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:54:44.000Z",
+                  "updatedAt": "2026-07-28T02:54:44.000Z",
+                  "uid": "35240-b6ca6344-144d-4d43-aaf7-ead34bf706c1"
+                },
+                {
+                  "name": "Create Language",
+                  "id": "7348ce6f-01ff-4e36-8fb1-6461295c8884",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"key\": \"<string>\",\n  \"name\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/v1/languages",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "v1",
+                        "languages"
+                      ]
+                    },
+                    "description": "Creates a new language in the project with a unique language key."
+                  },
+                  "response": [
+                    {
+                      "id": "a952af4a-6ab8-4dab-afd0-837ce583b94c",
+                      "name": "Language created successfully",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "X-SimpleLocalize-Token",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"key\": \"<string>\",\n  \"name\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/languages",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "languages"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"status\": \"<integer>\",\n  \"message\": \"<string>\",\n  \"data\": {\n    \"key\": \"<string>\",\n    \"name\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-07-28T02:54:44.000Z",
+                      "updatedAt": "2026-07-28T02:54:44.000Z",
+                      "uid": "35240-a952af4a-6ab8-4dab-afd0-837ce583b94c"
+                    },
+                    {
+                      "id": "cc205b7b-0e1b-4f38-ac92-d8460dd8b8ba",
+                      "name": "Invalid request or duplicate language key",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "X-SimpleLocalize-Token",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"key\": \"<string>\",\n  \"name\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/languages",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "languages"
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T02:54:44.000Z",
+                      "updatedAt": "2026-07-28T02:54:44.000Z",
+                      "uid": "35240-cc205b7b-0e1b-4f38-ac92-d8460dd8b8ba"
+                    },
+                    {
+                      "id": "b67a4461-a1ff-46b2-b4b4-8a86a1dcd9c5",
+                      "name": "Unauthorized - invalid or missing API key",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "X-SimpleLocalize-Token",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"key\": \"<string>\",\n  \"name\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/languages",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "languages"
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T02:54:44.000Z",
+                      "updatedAt": "2026-07-28T02:54:44.000Z",
+                      "uid": "35240-b67a4461-a1ff-46b2-b4b4-8a86a1dcd9c5"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:54:44.000Z",
+                  "updatedAt": "2026-07-28T02:54:44.000Z",
+                  "uid": "35240-7348ce6f-01ff-4e36-8fb1-6461295c8884"
+                }
+              ],
+              "id": "592445f7-7edc-4366-9426-6c1c99520112",
+              "createdAt": "2026-07-28T02:54:44.000Z",
+              "updatedAt": "2026-07-28T02:54:44.000Z",
+              "uid": "35240-592445f7-7edc-4366-9426-6c1c99520112"
+            }
+          ],
+          "id": "a15f8f7d-246b-4df4-80de-12b94c114819",
+          "createdAt": "2026-07-28T02:54:44.000Z",
+          "updatedAt": "2026-07-28T02:54:44.000Z",
+          "uid": "35240-a15f8f7d-246b-4df4-80de-12b94c114819"
+        }
+      ],
+      "id": "aa08380d-c7fd-4a5b-9afc-8caaa267216b",
+      "createdAt": "2026-07-28T02:54:44.000Z",
+      "updatedAt": "2026-07-28T02:54:44.000Z",
+      "uid": "35240-aa08380d-c7fd-4a5b-9afc-8caaa267216b"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-SimpleLocalize-Token",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.simplelocalize.io"
+    }
+  ]
+}

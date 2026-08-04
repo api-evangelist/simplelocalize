@@ -1,0 +1,402 @@
+{
+  "info": {
+    "_postman_id": "54666f2a-93ee-430b-adf1-10b289f3923f",
+    "name": "SimpleLocalize Customers Projects API",
+    "description": "The SimpleLocalize API is a REST API for managing translations, languages, projects, and customers. It enables developers to create, read, update, and delete translations programmatically, import and export translation files in 30+ formats, auto-translate using DeepL, Google Translate, or OpenAI, and publish translations to CDN for use in web, mobile, and backend applications.\n\nContact Support:\n Name: SimpleLocalize Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:54:44.000Z",
+    "updatedAt": "2026-07-28T02:54:45.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-54666f2a-93ee-430b-adf1-10b289f3923f"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "v2",
+          "item": [
+            {
+              "name": "projects",
+              "item": [
+                {
+                  "name": "List Projects",
+                  "id": "c63ca36c-e192-43e5-b2b7-a3302dc3d822",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/v2/projects",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "v2",
+                        "projects"
+                      ]
+                    },
+                    "description": "Retrieves all existing projects with their metadata, language configurations, and translation statistics. Requires Personal Token authentication."
+                  },
+                  "response": [
+                    {
+                      "id": "7ad342ea-d77b-4b29-86be-228a132f0bdd",
+                      "name": "Projects retrieved successfully",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v2/projects",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v2",
+                            "projects"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"status\": \"<integer>\",\n  \"message\": \"<string>\",\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"apiKey\": \"<string>\",\n      \"createdAt\": \"<dateTime>\",\n      \"languages\": [\n        {\n          \"key\": \"<string>\",\n          \"name\": \"<string>\"\n        },\n        {\n          \"key\": \"<string>\",\n          \"name\": \"<string>\"\n        }\n      ],\n      \"translationCount\": \"<integer>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"apiKey\": \"<string>\",\n      \"createdAt\": \"<dateTime>\",\n      \"languages\": [\n        {\n          \"key\": \"<string>\",\n          \"name\": \"<string>\"\n        },\n        {\n          \"key\": \"<string>\",\n          \"name\": \"<string>\"\n        }\n      ],\n      \"translationCount\": \"<integer>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T02:54:45.000Z",
+                      "updatedAt": "2026-07-28T02:54:45.000Z",
+                      "uid": "35240-7ad342ea-d77b-4b29-86be-228a132f0bdd"
+                    },
+                    {
+                      "id": "2e3cdff8-a86f-4e28-a4a4-32ebf8f0017f",
+                      "name": "Unauthorized - invalid or missing Personal Token",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v2/projects",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v2",
+                            "projects"
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T02:54:45.000Z",
+                      "updatedAt": "2026-07-28T02:54:45.000Z",
+                      "uid": "35240-2e3cdff8-a86f-4e28-a4a4-32ebf8f0017f"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:54:45.000Z",
+                  "updatedAt": "2026-07-28T02:54:45.000Z",
+                  "uid": "35240-c63ca36c-e192-43e5-b2b7-a3302dc3d822"
+                },
+                {
+                  "name": "Create Project",
+                  "id": "ed888c8b-3749-449d-822b-6359c0e6a2c5",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/v2/projects",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "v2",
+                        "projects"
+                      ]
+                    },
+                    "description": "Creates a new translation project and returns project details including API tokens and initial configuration. Requires Personal Token authentication."
+                  },
+                  "response": [
+                    {
+                      "id": "47e51f6b-2fd6-4357-b61b-08709cbd33c8",
+                      "name": "Project created successfully",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v2/projects",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v2",
+                            "projects"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"status\": \"<integer>\",\n  \"message\": \"<string>\",\n  \"data\": {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"apiKey\": \"<string>\",\n    \"createdAt\": \"<dateTime>\",\n    \"languages\": [\n      {\n        \"key\": \"<string>\",\n        \"name\": \"<string>\"\n      },\n      {\n        \"key\": \"<string>\",\n        \"name\": \"<string>\"\n      }\n    ],\n    \"translationCount\": \"<integer>\"\n  }\n}",
+                      "createdAt": "2026-07-28T02:54:45.000Z",
+                      "updatedAt": "2026-07-28T02:54:45.000Z",
+                      "uid": "35240-47e51f6b-2fd6-4357-b61b-08709cbd33c8"
+                    },
+                    {
+                      "id": "20b275cb-4f0f-4ffb-93a5-b83744c87e73",
+                      "name": "Invalid request body",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v2/projects",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v2",
+                            "projects"
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T02:54:45.000Z",
+                      "updatedAt": "2026-07-28T02:54:45.000Z",
+                      "uid": "35240-20b275cb-4f0f-4ffb-93a5-b83744c87e73"
+                    },
+                    {
+                      "id": "1d49eb58-8b0d-4a37-b5f0-f2b02053c130",
+                      "name": "Unauthorized - invalid or missing Personal Token",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v2/projects",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v2",
+                            "projects"
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T02:54:45.000Z",
+                      "updatedAt": "2026-07-28T02:54:45.000Z",
+                      "uid": "35240-1d49eb58-8b0d-4a37-b5f0-f2b02053c130"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:54:45.000Z",
+                  "updatedAt": "2026-07-28T02:54:45.000Z",
+                  "uid": "35240-ed888c8b-3749-449d-822b-6359c0e6a2c5"
+                }
+              ],
+              "id": "b6223acd-3290-466a-9a27-c27fa4cbdd69",
+              "createdAt": "2026-07-28T02:54:45.000Z",
+              "updatedAt": "2026-07-28T02:54:45.000Z",
+              "uid": "35240-b6223acd-3290-466a-9a27-c27fa4cbdd69"
+            }
+          ],
+          "id": "6bea7c4f-d122-415d-ad64-c46a252c3cf9",
+          "createdAt": "2026-07-28T02:54:45.000Z",
+          "updatedAt": "2026-07-28T02:54:45.000Z",
+          "uid": "35240-6bea7c4f-d122-415d-ad64-c46a252c3cf9"
+        }
+      ],
+      "id": "ac8fdb42-52b6-4f5b-94b4-198eadecb456",
+      "createdAt": "2026-07-28T02:54:45.000Z",
+      "updatedAt": "2026-07-28T02:54:45.000Z",
+      "uid": "35240-ac8fdb42-52b6-4f5b-94b4-198eadecb456"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-SimpleLocalize-Token",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.simplelocalize.io"
+    }
+  ]
+}
