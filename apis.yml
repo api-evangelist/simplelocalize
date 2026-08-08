@@ -198,7 +198,7 @@ common:
     url: https://github.com/simplelocalize/github-action-cli
   - type: VSCodeExtension
     url: https://github.com/simplelocalize/vscode-simplelocalize
-  - type: MCP
+  - type: Documentation
     url: https://github.com/simplelocalize/simplelocalize-mcp-server
   - type: SDKs
     url: https://github.com/simplelocalize/simplelocalize-cli-npm
