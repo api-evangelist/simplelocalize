@@ -1,0 +1,62 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SimpleLocalize Customers Import API",
+    "version": "v2"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-SimpleLocalize-Token",
+      "value": "{{X-SimpleLocalize-Token}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Import",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Import Translations",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.simplelocalize.io/api/v1/import",
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "file",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "uploadFormat",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "languageKey",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "namespace",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Imports translation files in 30+ supported formats including JSON, YAML, XLIFF, Android XML, iOS Strings, Java Properties, PHP, PO/POT, CSV, Excel, and more. Rate limited to 60 req/min per project."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

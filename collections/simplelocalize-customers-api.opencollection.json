@@ -1,0 +1,113 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SimpleLocalize Customers API",
+    "version": "v2"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-SimpleLocalize-Token",
+      "value": "{{X-SimpleLocalize-Token}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Customers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Customers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.simplelocalize.io/api/v1/customers"
+          },
+          "docs": "Returns all available customers in the project."
+        },
+        {
+          "info": {
+            "name": "Create Customer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.simplelocalize.io/api/v1/customers",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Establishes a new customer record for project-specific translations. Customer key must be unique and up to 40 characters."
+        },
+        {
+          "info": {
+            "name": "Get Customer",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.simplelocalize.io/api/v1/customers/:customerKey",
+            "params": [
+              {
+                "name": "customerKey",
+                "value": "",
+                "type": "path",
+                "description": "The unique customer identifier"
+              }
+            ]
+          },
+          "docs": "Retrieves details for a specific customer by their key."
+        },
+        {
+          "info": {
+            "name": "Update Customer",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.simplelocalize.io/api/v1/customers/:customerKey",
+            "params": [
+              {
+                "name": "customerKey",
+                "value": "",
+                "type": "path",
+                "description": "The unique customer identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Modifies an existing customer's key or description."
+        },
+        {
+          "info": {
+            "name": "Delete Customer",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.simplelocalize.io/api/v1/customers/:customerKey",
+            "params": [
+              {
+                "name": "customerKey",
+                "value": "",
+                "type": "path",
+                "description": "The unique customer identifier"
+              }
+            ]
+          },
+          "docs": "Removes a customer record from the project."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

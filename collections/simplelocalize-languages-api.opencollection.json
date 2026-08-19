@@ -1,0 +1,94 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SimpleLocalize Customers Languages API",
+    "version": "v2"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-SimpleLocalize-Token",
+      "value": "{{X-SimpleLocalize-Token}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Languages",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Languages",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.simplelocalize.io/api/v1/languages"
+          },
+          "docs": "Retrieves all languages configured in the project."
+        },
+        {
+          "info": {
+            "name": "Create Language",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.simplelocalize.io/api/v1/languages",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new language in the project with a unique language key."
+        },
+        {
+          "info": {
+            "name": "Update Language",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.simplelocalize.io/api/v1/languages/:languageKey",
+            "params": [
+              {
+                "name": "languageKey",
+                "value": "",
+                "type": "path",
+                "description": "The language identifier to update"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Modifies an existing language's key or display name."
+        },
+        {
+          "info": {
+            "name": "Delete Language",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.simplelocalize.io/api/v1/languages/:languageKey",
+            "params": [
+              {
+                "name": "languageKey",
+                "value": "",
+                "type": "path",
+                "description": "The language identifier to delete"
+              }
+            ]
+          },
+          "docs": "Removes a language from the project. This also removes all translations for the given language."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,57 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SimpleLocalize Customers Export API",
+    "version": "v2"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-SimpleLocalize-Token",
+      "value": "{{X-SimpleLocalize-Token}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Export",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Export Translations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.simplelocalize.io/api/v1/export",
+            "params": [
+              {
+                "name": "downloadFormat",
+                "value": "",
+                "type": "query",
+                "description": "Target file format for export"
+              },
+              {
+                "name": "languageKey",
+                "value": "",
+                "type": "query",
+                "description": "Export only the specified language"
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "query",
+                "description": "Export only the specified namespace"
+              }
+            ]
+          },
+          "docs": "Exports translation files in the requested format. Supports all 30+ format types and optional filtering by language, namespace, or customer. Rate limited to 60 req/min per project."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
