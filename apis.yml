@@ -39,6 +39,9 @@ apis:
   humanURL: https://simplelocalize.io/docs/api/language-api/
   baseURL: https://api.simplelocalize.io
   tags:
+  - Language
+  - Localization
+  tags_raw:
   - Languages
   - Localization
   properties:
@@ -52,6 +55,9 @@ apis:
   humanURL: https://simplelocalize.io/docs/api/translation-project-management/
   baseURL: https://api.simplelocalize.io
   tags:
+  - Project
+  - Management
+  tags_raw:
   - Projects
   - Management
   properties:
@@ -119,6 +125,8 @@ apis:
   humanURL: https://simplelocalize.io/docs/api/get-started/
   baseURL: https://api.simplelocalize.io
   tags:
+  - Language
+  tags_raw:
   - Languages
   properties:
   - type: OpenAPI
@@ -133,6 +141,8 @@ apis:
   humanURL: https://simplelocalize.io/docs/api/get-started/
   baseURL: https://api.simplelocalize.io
   tags:
+  - Project
+  tags_raw:
   - Projects
   properties:
   - type: OpenAPI
