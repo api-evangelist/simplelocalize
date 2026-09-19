@@ -184,6 +184,8 @@ apis:
   humanURL: https://simplelocalize.io/docs/api/get-started/
   baseURL: https://api.simplelocalize.io
   tags:
+  - Translation
+  tags_raw:
   - Translations
   properties:
   - type: OpenAPI
