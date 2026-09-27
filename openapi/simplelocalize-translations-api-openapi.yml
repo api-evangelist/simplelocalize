@@ -129,24 +129,6 @@ paths:
           description: Rate limit exceeded
 components:
   schemas:
-    TranslationRequest:
-      type: object
-      required:
-      - key
-      - language
-      properties:
-        key:
-          type: string
-          description: Translation key identifier
-        namespace:
-          type: string
-          description: Translation namespace
-        language:
-          type: string
-          description: Target language identifier
-        text:
-          type: string
-          description: Translated text content
     Translation:
       type: object
       properties:
@@ -175,6 +157,35 @@ components:
           type: string
           format: date-time
           description: Timestamp of last modification
+    TranslationResponse:
+      type: object
+      properties:
+        status:
+          type: integer
+          description: HTTP status code
+        message:
+          type: string
+          description: Response message
+        data:
+          $ref: '#/components/schemas/Translation'
+    TranslationRequest:
+      type: object
+      required:
+      - key
+      - language
+      properties:
+        key:
+          type: string
+          description: Translation key identifier
+        namespace:
+          type: string
+          description: Translation namespace
+        language:
+          type: string
+          description: Target language identifier
+        text:
+          type: string
+          description: Translated text content
     TranslationListResponse:
       type: object
       properties:
@@ -192,17 +203,6 @@ components:
           type: integer
         totalElements:
           type: integer
-    TranslationResponse:
-      type: object
-      properties:
-        status:
-          type: integer
-          description: HTTP status code
-        message:
-          type: string
-          description: Response message
-        data:
-          $ref: '#/components/schemas/Translation'
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

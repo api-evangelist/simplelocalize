@@ -131,17 +131,15 @@ paths:
           description: Customer not found
 components:
   schemas:
-    Customer:
+    UpdateCustomerRequest:
       type: object
       properties:
         key:
           type: string
-          description: Unique customer identifier (max 40 chars)
-          maxLength: 40
+          description: New customer identifier
         description:
           type: string
-          description: Customer details (max 255 chars)
-          maxLength: 255
+          description: Updated customer details
     CreateCustomerRequest:
       type: object
       required:
@@ -155,15 +153,17 @@ components:
           type: string
           description: Customer details (max 255 characters)
           maxLength: 255
-    CustomerResponse:
+    Customer:
       type: object
       properties:
-        status:
-          type: integer
-        message:
+        key:
           type: string
-        data:
-          $ref: '#/components/schemas/Customer'
+          description: Unique customer identifier (max 40 chars)
+          maxLength: 40
+        description:
+          type: string
+          description: Customer details (max 255 chars)
+          maxLength: 255
     CustomerListResponse:
       type: object
       properties:
@@ -175,15 +175,15 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Customer'
-    UpdateCustomerRequest:
+    CustomerResponse:
       type: object
       properties:
-        key:
+        status:
+          type: integer
+        message:
           type: string
-          description: New customer identifier
-        description:
-          type: string
-          description: Updated customer details
+        data:
+          $ref: '#/components/schemas/Customer'
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
