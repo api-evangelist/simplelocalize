@@ -129,45 +129,6 @@ paths:
           description: Rate limit exceeded
 components:
   schemas:
-    Translation:
-      type: object
-      properties:
-        key:
-          type: string
-          description: Translation key identifier
-        namespace:
-          type: string
-          description: Translation namespace for organizing keys
-        language:
-          type: string
-          description: Language identifier (e.g., en, fr, de)
-        text:
-          type: string
-          description: The translated text
-        reviewStatus:
-          type: string
-          description: Review status of the translation
-          enum:
-          - REVIEWED
-          - NOT_REVIEWED
-        customerId:
-          type: string
-          description: Associated customer identifier for customer-specific translations
-        modifiedAt:
-          type: string
-          format: date-time
-          description: Timestamp of last modification
-    TranslationResponse:
-      type: object
-      properties:
-        status:
-          type: integer
-          description: HTTP status code
-        message:
-          type: string
-          description: Response message
-        data:
-          $ref: '#/components/schemas/Translation'
     TranslationRequest:
       type: object
       required:
@@ -203,6 +164,45 @@ components:
           type: integer
         totalElements:
           type: integer
+    TranslationResponse:
+      type: object
+      properties:
+        status:
+          type: integer
+          description: HTTP status code
+        message:
+          type: string
+          description: Response message
+        data:
+          $ref: '#/components/schemas/Translation'
+    Translation:
+      type: object
+      properties:
+        key:
+          type: string
+          description: Translation key identifier
+        namespace:
+          type: string
+          description: Translation namespace for organizing keys
+        language:
+          type: string
+          description: Language identifier (e.g., en, fr, de)
+        text:
+          type: string
+          description: The translated text
+        reviewStatus:
+          type: string
+          description: Review status of the translation
+          enum:
+          - REVIEWED
+          - NOT_REVIEWED
+        customerId:
+          type: string
+          description: Associated customer identifier for customer-specific translations
+        modifiedAt:
+          type: string
+          format: date-time
+          description: Timestamp of last modification
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

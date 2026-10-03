@@ -72,6 +72,35 @@ components:
         name:
           type: string
           description: Project name
+    ProjectListResponse:
+      type: object
+      properties:
+        status:
+          type: integer
+        message:
+          type: string
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Project'
+    Language:
+      type: object
+      properties:
+        key:
+          type: string
+          description: Unique language identifier (max 20 chars)
+        name:
+          type: string
+          description: Display name for the language (max 200 chars)
+    ProjectResponse:
+      type: object
+      properties:
+        status:
+          type: integer
+        message:
+          type: string
+        data:
+          $ref: '#/components/schemas/Project'
     Project:
       type: object
       properties:
@@ -93,35 +122,6 @@ components:
             $ref: '#/components/schemas/Language'
         translationCount:
           type: integer
-    Language:
-      type: object
-      properties:
-        key:
-          type: string
-          description: Unique language identifier (max 20 chars)
-        name:
-          type: string
-          description: Display name for the language (max 200 chars)
-    ProjectListResponse:
-      type: object
-      properties:
-        status:
-          type: integer
-        message:
-          type: string
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Project'
-    ProjectResponse:
-      type: object
-      properties:
-        status:
-          type: integer
-        message:
-          type: string
-        data:
-          $ref: '#/components/schemas/Project'
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
