@@ -107,15 +107,6 @@ paths:
           description: Language not found
 components:
   schemas:
-    Language:
-      type: object
-      properties:
-        key:
-          type: string
-          description: Unique language identifier (max 20 chars)
-        name:
-          type: string
-          description: Display name for the language (max 200 chars)
     CreateLanguageRequest:
       type: object
       required:
@@ -138,15 +129,15 @@ components:
           type: string
         data:
           $ref: '#/components/schemas/Language'
-    UpdateLanguageRequest:
+    Language:
       type: object
       properties:
         key:
           type: string
-          description: New language key
+          description: Unique language identifier (max 20 chars)
         name:
           type: string
-          description: New language display name
+          description: Display name for the language (max 200 chars)
     LanguageListResponse:
       type: object
       properties:
@@ -158,6 +149,15 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Language'
+    UpdateLanguageRequest:
+      type: object
+      properties:
+        key:
+          type: string
+          description: New language key
+        name:
+          type: string
+          description: New language display name
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

@@ -64,14 +64,24 @@ paths:
           description: Unauthorized - invalid or missing Personal Token
 components:
   schemas:
-    CreateProjectRequest:
+    ProjectResponse:
       type: object
-      required:
-      - name
       properties:
+        status:
+          type: integer
+        message:
+          type: string
+        data:
+          $ref: '#/components/schemas/Project'
+    Language:
+      type: object
+      properties:
+        key:
+          type: string
+          description: Unique language identifier (max 20 chars)
         name:
           type: string
-          description: Project name
+          description: Display name for the language (max 200 chars)
     ProjectListResponse:
       type: object
       properties:
@@ -83,24 +93,14 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Project'
-    Language:
+    CreateProjectRequest:
       type: object
+      required:
+      - name
       properties:
-        key:
-          type: string
-          description: Unique language identifier (max 20 chars)
         name:
           type: string
-          description: Display name for the language (max 200 chars)
-    ProjectResponse:
-      type: object
-      properties:
-        status:
-          type: integer
-        message:
-          type: string
-        data:
-          $ref: '#/components/schemas/Project'
+          description: Project name
     Project:
       type: object
       properties:

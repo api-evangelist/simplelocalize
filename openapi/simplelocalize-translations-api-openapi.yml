@@ -147,34 +147,6 @@ components:
         text:
           type: string
           description: Translated text content
-    TranslationListResponse:
-      type: object
-      properties:
-        status:
-          type: integer
-        message:
-          type: string
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Translation'
-        page:
-          type: integer
-        totalPages:
-          type: integer
-        totalElements:
-          type: integer
-    TranslationResponse:
-      type: object
-      properties:
-        status:
-          type: integer
-          description: HTTP status code
-        message:
-          type: string
-          description: Response message
-        data:
-          $ref: '#/components/schemas/Translation'
     Translation:
       type: object
       properties:
@@ -203,6 +175,34 @@ components:
           type: string
           format: date-time
           description: Timestamp of last modification
+    TranslationResponse:
+      type: object
+      properties:
+        status:
+          type: integer
+          description: HTTP status code
+        message:
+          type: string
+          description: Response message
+        data:
+          $ref: '#/components/schemas/Translation'
+    TranslationListResponse:
+      type: object
+      properties:
+        status:
+          type: integer
+        message:
+          type: string
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Translation'
+        page:
+          type: integer
+        totalPages:
+          type: integer
+        totalElements:
+          type: integer
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
