@@ -107,6 +107,35 @@ paths:
           description: Language not found
 components:
   schemas:
+    LanguageListResponse:
+      type: object
+      properties:
+        status:
+          type: integer
+        message:
+          type: string
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Language'
+    LanguageResponse:
+      type: object
+      properties:
+        status:
+          type: integer
+        message:
+          type: string
+        data:
+          $ref: '#/components/schemas/Language'
+    UpdateLanguageRequest:
+      type: object
+      properties:
+        key:
+          type: string
+          description: New language key
+        name:
+          type: string
+          description: New language display name
     CreateLanguageRequest:
       type: object
       required:
@@ -120,15 +149,6 @@ components:
           type: string
           description: Language display name (max 200 characters)
           maxLength: 200
-    LanguageResponse:
-      type: object
-      properties:
-        status:
-          type: integer
-        message:
-          type: string
-        data:
-          $ref: '#/components/schemas/Language'
     Language:
       type: object
       properties:
@@ -138,26 +158,6 @@ components:
         name:
           type: string
           description: Display name for the language (max 200 chars)
-    LanguageListResponse:
-      type: object
-      properties:
-        status:
-          type: integer
-        message:
-          type: string
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Language'
-    UpdateLanguageRequest:
-      type: object
-      properties:
-        key:
-          type: string
-          description: New language key
-        name:
-          type: string
-          description: New language display name
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

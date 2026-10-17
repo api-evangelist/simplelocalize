@@ -129,24 +129,34 @@ paths:
           description: Rate limit exceeded
 components:
   schemas:
-    TranslationRequest:
+    TranslationListResponse:
       type: object
-      required:
-      - key
-      - language
       properties:
-        key:
+        status:
+          type: integer
+        message:
           type: string
-          description: Translation key identifier
-        namespace:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Translation'
+        page:
+          type: integer
+        totalPages:
+          type: integer
+        totalElements:
+          type: integer
+    TranslationResponse:
+      type: object
+      properties:
+        status:
+          type: integer
+          description: HTTP status code
+        message:
           type: string
-          description: Translation namespace
-        language:
-          type: string
-          description: Target language identifier
-        text:
-          type: string
-          description: Translated text content
+          description: Response message
+        data:
+          $ref: '#/components/schemas/Translation'
     Translation:
       type: object
       properties:
@@ -175,34 +185,24 @@ components:
           type: string
           format: date-time
           description: Timestamp of last modification
-    TranslationResponse:
+    TranslationRequest:
       type: object
+      required:
+      - key
+      - language
       properties:
-        status:
-          type: integer
-          description: HTTP status code
-        message:
+        key:
           type: string
-          description: Response message
-        data:
-          $ref: '#/components/schemas/Translation'
-    TranslationListResponse:
-      type: object
-      properties:
-        status:
-          type: integer
-        message:
+          description: Translation key identifier
+        namespace:
           type: string
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Translation'
-        page:
-          type: integer
-        totalPages:
-          type: integer
-        totalElements:
-          type: integer
+          description: Translation namespace
+        language:
+          type: string
+          description: Target language identifier
+        text:
+          type: string
+          description: Translated text content
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
